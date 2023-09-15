@@ -16,18 +16,13 @@
         "handleGetThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
           "s3Key": "amplify-builds/handleGetThread-59504c6c534a336a5675-build.zip"
-        },
-        "handleGetThreadsList": {
-          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleGetThreadsList-6f443444306f497a5830-build.zip"
         }
       },
       "auth": {
         "amplifyaidev0e5a9945": {}
       },
       "api": {
-        "amplifyAiProjectAPI": {},
-        "getThreadsList": {}
+        "amplifyAiProjectAPI": {}
       },
       "storage": {
         "amplifyAiStorage": {},
