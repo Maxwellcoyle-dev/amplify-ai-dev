@@ -9,22 +9,6 @@
           ],
           "category": "function",
           "resourceName": "handleGetThread"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "handleGetThreads"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "handleCurrentThread"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -60,39 +44,7 @@
     }
   },
   "function": {
-    "handleCurrentThread": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn",
-            "StreamArn"
-          ],
-          "category": "storage",
-          "resourceName": "amplifyAiProjectTable"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "handleGetThread": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn",
-            "StreamArn"
-          ],
-          "category": "storage",
-          "resourceName": "amplifyAiProjectTable"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "handleGetThreads": {
       "build": true,
       "dependsOn": [
         {
@@ -110,22 +62,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_handleCurrentThread_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleCurrentThread"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleCurrentThread_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleCurrentThread"
-        }
-      ]
-    },
     "AMPLIFY_function_handleGetThread_deploymentBucketName": {
       "usedBy": [
         {
@@ -139,22 +75,6 @@
         {
           "category": "function",
           "resourceName": "handleGetThread"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleGetThreads_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleGetThreads"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleGetThreads_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleGetThreads"
         }
       ]
     }
