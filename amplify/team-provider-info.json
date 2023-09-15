@@ -15,7 +15,7 @@
       "function": {
         "handleGetThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleGetThread-59474d5a36756c367975-build.zip"
+          "s3Key": "amplify-builds/handleGetThread-59504c6c534a336a5675-build.zip"
         },
         "handleGetThreadsList": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
