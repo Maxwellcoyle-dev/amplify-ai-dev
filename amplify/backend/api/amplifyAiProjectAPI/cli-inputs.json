@@ -7,13 +7,6 @@
       "permissions": {
         "setting": "open"
       }
-    },
-    "/getThreadsList": {
-      "name": "/getThreadsList",
-      "lambdaFunction": "handleGetThreadsList",
-      "permissions": {
-        "setting": "open"
-      }
     }
   }
 }

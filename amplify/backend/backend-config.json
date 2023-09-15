@@ -9,14 +9,6 @@
           ],
           "category": "function",
           "resourceName": "handleGetThread"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "handleGetThreadsList"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -67,54 +59,6 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "handleGetThreadsList": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "BucketName"
-          ],
-          "category": "storage",
-          "resourceName": "amplifyAiStorage"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_handleGetThread_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleGetThread"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleGetThread_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleGetThread"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleGetThreadsList_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleGetThreadsList"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleGetThreadsList_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleGetThreadsList"
-        }
-      ]
     }
   },
   "storage": {
