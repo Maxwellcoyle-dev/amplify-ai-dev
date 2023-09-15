@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "storage": {
+      "amplifyAiProjectTable": [
+        "create",
+        "read",
+        "update"
+      ],
+      "amplifyAiStorage": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

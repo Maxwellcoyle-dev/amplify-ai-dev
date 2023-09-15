@@ -49,6 +49,30 @@
           ],
           "category": "function",
           "resourceName": "handleDeleteThread"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "handleDeleteFile"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "handleUploadFile"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "handleChatGPT4"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -84,6 +108,11 @@
     }
   },
   "function": {
+    "handleChatGPT4": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "handleCurrentThread": {
       "build": true,
       "dependsOn": [
@@ -95,6 +124,29 @@
           ],
           "category": "storage",
           "resourceName": "amplifyAiProjectTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "handleDeleteFile": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiProjectTable"
+        },
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiStorage"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -179,9 +231,48 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "handleUploadFile": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiProjectTable"
+        },
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiStorage"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
+    "AMPLIFY_function_handleChatGPT4_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleChatGPT4"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleChatGPT4_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleChatGPT4"
+        }
+      ]
+    },
     "AMPLIFY_function_handleCurrentThread_deploymentBucketName": {
       "usedBy": [
         {
@@ -195,6 +286,22 @@
         {
           "category": "function",
           "resourceName": "handleCurrentThread"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleDeleteFile_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleDeleteFile"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleDeleteFile_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleDeleteFile"
         }
       ]
     },
@@ -275,6 +382,22 @@
         {
           "category": "function",
           "resourceName": "handleUpdateThreadUrls"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleUploadFile_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleUploadFile"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleUploadFile_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleUploadFile"
         }
       ]
     }

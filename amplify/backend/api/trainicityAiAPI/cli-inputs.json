@@ -42,6 +42,27 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/deleteFile": {
+      "name": "/deleteFile",
+      "lambdaFunction": "handleDeleteFile",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/uploadFile": {
+      "name": "/uploadFile",
+      "lambdaFunction": "handleUploadFile",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/chatGPT4": {
+      "name": "/chatGPT4",
+      "lambdaFunction": "handleChatGPT4",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }
