@@ -15,7 +15,7 @@
       "function": {
         "handleGetThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleGetThread-784a4365446b56536675-build.zip"
+          "s3Key": "amplify-builds/handleGetThread-4c2b45344a723734334d-build.zip"
         }
       },
       "auth": {
@@ -25,7 +25,8 @@
         "amplifyAiProjectAPI": {}
       },
       "storage": {
-        "amplifyAiStorage": {}
+        "amplifyAiStorage": {},
+        "amplifyAiProjectTable": {}
       }
     }
   }

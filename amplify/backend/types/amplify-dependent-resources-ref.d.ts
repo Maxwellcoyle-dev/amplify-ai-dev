@@ -27,6 +27,16 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
+    "amplifyAiProjectTable": {
+      "Arn": "string",
+      "Name": "string",
+      "PartitionKeyName": "string",
+      "PartitionKeyType": "string",
+      "Region": "string",
+      "SortKeyName": "string",
+      "SortKeyType": "string",
+      "StreamArn": "string"
+    },
     "amplifyAiStorage": {
       "BucketName": "string",
       "Region": "string"

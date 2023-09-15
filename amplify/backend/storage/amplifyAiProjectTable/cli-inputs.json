@@ -1,0 +1,14 @@
+{
+  "resourceName": "amplifyAiProjectTable",
+  "tableName": "amplifyAiProjectTable",
+  "partitionKey": {
+    "fieldName": "UserID",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "ThreadID",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
