@@ -13,13 +13,20 @@
     },
     "categories": {
       "function": {
-        "handleGetThreadsList": {},
+        "handleGetThreadsList": {
+          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
+          "s3Key": "amplify-builds/handleGetThreadsList-794b3570375568324e34-build.zip"
+        },
         "handleDeleteThread": {},
         "handleUpdateThreadTitle": {},
         "handleUpdateThreadUrls": {},
         "handleDeleteFile": {},
         "handleUploadFile": {},
-        "handleChatGPT4": {}
+        "handleChatGPT4": {},
+        "handleGetThread": {
+          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
+          "s3Key": "amplify-builds/handleGetThread-365046383159747a4957-build.zip"
+        }
       },
       "auth": {
         "amplifyaidev0e5a9945": {}
@@ -27,6 +34,9 @@
       "storage": {
         "amplifyAiStorage": {},
         "amplifyAiProjectTable": {}
+      },
+      "api": {
+        "trainicityAiAPI": {}
       }
     }
   }

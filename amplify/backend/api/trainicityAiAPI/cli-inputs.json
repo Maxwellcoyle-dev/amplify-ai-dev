@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/getThread": {
+      "name": "/getThread",
+      "lambdaFunction": "handleGetThread",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/getThreadsList": {
+      "name": "/getThreadsList",
+      "lambdaFunction": "handleGetThreadsList",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
