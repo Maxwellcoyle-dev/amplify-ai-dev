@@ -44,6 +44,30 @@
     }
   },
   "function": {
+    "handleCurrentThread": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "ApiName",
+            "ApiId"
+          ],
+          "category": "api",
+          "resourceName": "amplifyAiProjectAPI"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiProjectTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "handleGetThread": {
       "build": true,
       "dependsOn": [
@@ -62,6 +86,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_handleCurrentThread_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleCurrentThread"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleCurrentThread_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleCurrentThread"
+        }
+      ]
+    },
     "AMPLIFY_function_handleGetThread_deploymentBucketName": {
       "usedBy": [
         {

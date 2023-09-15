@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "api": {
+      "amplifyAiProjectAPI": [
+        "read"
+      ]
+    },
+    "storage": {
+      "amplifyAiProjectTable": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
