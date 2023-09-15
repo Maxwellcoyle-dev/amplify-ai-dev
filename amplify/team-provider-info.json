@@ -13,20 +13,16 @@
     },
     "categories": {
       "function": {
-        "handleGetThread": {
-          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleGetThread-59504c6c534a336a5675-build.zip"
-        },
-        "handleCurrentThread": {
-          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleCurrentThread-576f2f6b62733253397a-build.zip"
-        }
+        "handleGetThreadsList": {},
+        "handleDeleteThread": {},
+        "handleUpdateThreadTitle": {},
+        "handleUpdateThreadUrls": {},
+        "handleDeleteFile": {},
+        "handleUploadFile": {},
+        "handleChatGPT4": {}
       },
       "auth": {
         "amplifyaidev0e5a9945": {}
-      },
-      "api": {
-        "amplifyAiProjectAPI": {}
       },
       "storage": {
         "amplifyAiStorage": {},

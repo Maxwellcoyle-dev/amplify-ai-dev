@@ -1,20 +1,5 @@
 {
-  "api": {
-    "amplifyAiProjectAPI": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "handleGetThread"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    }
-  },
+  "api": {},
   "auth": {
     "amplifyaidev0e5a9945": {
       "customAuth": false,
@@ -43,82 +28,7 @@
       "service": "Cognito"
     }
   },
-  "function": {
-    "handleCurrentThread": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ],
-          "category": "api",
-          "resourceName": "amplifyAiProjectAPI"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn",
-            "StreamArn"
-          ],
-          "category": "storage",
-          "resourceName": "amplifyAiProjectTable"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "handleGetThread": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn",
-            "StreamArn"
-          ],
-          "category": "storage",
-          "resourceName": "amplifyAiProjectTable"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_handleCurrentThread_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleCurrentThread"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleCurrentThread_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleCurrentThread"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleGetThread_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleGetThread"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleGetThread_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleGetThread"
-        }
-      ]
-    }
-  },
+  "function": {},
   "storage": {
     "amplifyAiProjectTable": {
       "providerPlugin": "awscloudformation",
