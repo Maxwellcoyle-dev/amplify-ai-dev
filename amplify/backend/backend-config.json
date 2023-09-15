@@ -13,6 +13,20 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
+    },
+    "getThreadsList": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "handleGetThreadsList"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -59,6 +73,46 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "handleGetThreadsList": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_handleGetThread_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleGetThread"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleGetThread_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleGetThread"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleGetThreadsList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleGetThreadsList"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleGetThreadsList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleGetThreadsList"
+        }
+      ]
     }
   },
   "storage": {
