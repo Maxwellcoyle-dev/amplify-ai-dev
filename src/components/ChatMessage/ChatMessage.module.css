@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.textContainerReadOnly {
+  display: flex;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background-color: rgb(237, 234, 234);
+  border-radius: 1rem;
+}
+
+.textContainerEditable {
+  display: flex;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 0.5rem;
+}
