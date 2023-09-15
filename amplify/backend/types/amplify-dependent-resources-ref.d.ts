@@ -18,6 +18,20 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "handleCurrentThread": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "handleDeleteThread": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "handleGetThread": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -26,6 +40,20 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "handleGetThreadsList": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "handleUpdateThreadTitle": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "handleUpdateThreadUrls": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

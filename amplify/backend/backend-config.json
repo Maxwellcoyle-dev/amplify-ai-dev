@@ -17,6 +17,38 @@
           ],
           "category": "function",
           "resourceName": "handleGetThreadsList"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "handleCurrentThread"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "handleUpdateThreadTitle"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "handleUpdateThreadUrls"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "handleDeleteThread"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -52,6 +84,38 @@
     }
   },
   "function": {
+    "handleCurrentThread": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiProjectTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "handleDeleteThread": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiProjectTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "handleGetThread": {
       "build": true,
       "dependsOn": [
@@ -83,9 +147,73 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "handleUpdateThreadTitle": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiProjectTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "handleUpdateThreadUrls": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiProjectTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
+    "AMPLIFY_function_handleCurrentThread_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleCurrentThread"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleCurrentThread_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleCurrentThread"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleDeleteThread_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleDeleteThread"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleDeleteThread_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleDeleteThread"
+        }
+      ]
+    },
     "AMPLIFY_function_handleGetThread_deploymentBucketName": {
       "usedBy": [
         {
@@ -115,6 +243,38 @@
         {
           "category": "function",
           "resourceName": "handleGetThreadsList"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleUpdateThreadTitle_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleUpdateThreadTitle"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleUpdateThreadTitle_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleUpdateThreadTitle"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleUpdateThreadUrls_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleUpdateThreadUrls"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleUpdateThreadUrls_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleUpdateThreadUrls"
         }
       ]
     }
