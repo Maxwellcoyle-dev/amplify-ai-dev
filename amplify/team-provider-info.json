@@ -50,15 +50,15 @@
           "s3Key": "amplify-builds/handleCurrentThread-485236634f427a775357-build.zip"
         }
       },
-      "auth": {
-        "amplifyaidev0e5a9945": {}
-      },
       "storage": {
         "amplifyAiStorage": {},
         "amplifyAiProjectTable": {}
       },
       "api": {
         "trainicityAiAPI": {}
+      },
+      "auth": {
+        "amplifyaidev65a23030": {}
       }
     }
   }

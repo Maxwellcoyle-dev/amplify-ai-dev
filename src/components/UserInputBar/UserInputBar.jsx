@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-// React Icons
-import { VscSend } from "react-icons/vsc";
+// Ant D Icons
+import { SendOutlined } from "@ant-design/icons";
 
 // Custom Components
 import TextEntry from "../TextEntry/TextEntry";
@@ -39,7 +39,7 @@ const UserInputBar = () => {
       />
       <Button
         type="default"
-        icon={<VscSend />}
+        icon={<SendOutlined />}
         size="large"
         onClick={handleSubmit}
       />
