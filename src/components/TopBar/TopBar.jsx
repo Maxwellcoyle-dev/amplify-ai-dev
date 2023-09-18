@@ -5,12 +5,6 @@ import TopBarDropdown from "../TopBarDropdown/TopBarDropdown";
 import TopBarTitle from "../TopBarTitle/TopBarTitle";
 import TopBarMenu from "../TopBarMenu/TopBarMenu";
 
-// Ant UI
-import { Space } from "antd";
-
-// Custom styles
-import styles from "./TopBar.module.css";
-
 const TopBar = ({ setShowAttachmentModal }) => {
   return (
     <>

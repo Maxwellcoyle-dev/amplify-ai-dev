@@ -33,7 +33,12 @@ const App = ({ authUser }) => {
   return (
     <AppProvider>
       <Layout className={styles.container}>
-        <Sider collapsible collapsed={collapsed} onCollapse={handleCollapse}>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={handleCollapse}
+          theme="light"
+        >
           <SidePanel setCollapsed={setCollapsed} />
         </Sider>
         <Layout>

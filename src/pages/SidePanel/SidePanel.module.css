@@ -4,11 +4,20 @@
   width: 20%;
   min-width: 175px;
   height: 100vh;
-  background-color: azure;
 }
 
 .listSeparator {
   width: 100%;
+  padding: 0.5rem;
+  padding-left: 2rem;
+  background-color: #e6e6e6;
+  cursor: default;
+}
+
+.siderHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 0.5rem;
   padding-left: 2rem;
   background-color: #e6e6e6;

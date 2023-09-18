@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -15,9 +15,11 @@ import useGetThread from "../../hooks/useGetThread";
 
 // Ant UI
 import { RightOutlined, PlusOutlined } from "@ant-design/icons";
-import { Menu, Layout } from "antd";
+import { Menu, Typography, Space, Button } from "antd";
 
-const { Sider } = Layout;
+// styles
+import styles from "./SidePanel.module.css";
+
 const { Item } = Menu;
 
 const newThreadUUID = uuidv4();
@@ -48,8 +50,11 @@ const SidePanel = ({ setCollapsed }) => {
   return (
     <>
       <div className="demo-logo-vertical" />
+      <Space className={styles.siderHeader}>
+        <Typography>Welcome User</Typography>
+        <Button>Sign Out</Button>
+      </Space>
       <Menu
-        theme="dark"
         defaultSelectedKeys={[newThreadUUID]}
         mode="vertical"
         selectedKeys={currentThreadID ? [currentThreadID] : [newThreadUUID]}

@@ -15,39 +15,39 @@
       "function": {
         "handleGetThreadsList": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleGetThreadsList-794b3570375568324e34-build.zip"
+          "s3Key": "amplify-builds/handleGetThreadsList-5864416b54434b713934-build.zip"
         },
         "handleDeleteThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleDeleteThread-6e6b51467543657a594b-build.zip"
+          "s3Key": "amplify-builds/handleDeleteThread-44585a65744b594e6a4b-build.zip"
         },
         "handleUpdateThreadTitle": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleUpdateThreadTitle-71536753562f5a69696c-build.zip"
+          "s3Key": "amplify-builds/handleUpdateThreadTitle-673237715330526b6556-build.zip"
         },
         "handleUpdateThreadUrls": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleUpdateThreadUrls-6449354a506645732f41-build.zip"
+          "s3Key": "amplify-builds/handleUpdateThreadUrls-614d3436656c52656577-build.zip"
         },
         "handleDeleteFile": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleDeleteFile-4167326476674e5a6f36-build.zip"
+          "s3Key": "amplify-builds/handleDeleteFile-6654306f644e4f563353-build.zip"
         },
         "handleUploadFile": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleUploadFile-6a6b68524f6e776c6459-build.zip"
-        },
-        "handleChatGPT4": {
-          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleChatGPT4-484c3643365a6e675543-build.zip"
+          "s3Key": "amplify-builds/handleUploadFile-646d3236736f73324a55-build.zip"
         },
         "handleGetThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleGetThread-365046383159747a4957-build.zip"
+          "s3Key": "amplify-builds/handleGetThread-6a57466e664d6e302b79-build.zip"
         },
         "handleCurrentThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleCurrentThread-485236634f427a775357-build.zip"
+          "s3Key": "amplify-builds/handleCurrentThread-374d2b79574334634f54-build.zip"
+        },
+        "handleChatGPT4": {
+          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
+          "s3Key": "amplify-builds/handleChatGPT4-3848686444615242376d-build.zip"
         }
       },
       "storage": {
