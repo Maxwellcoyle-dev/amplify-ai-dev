@@ -47,7 +47,8 @@
         },
         "handleChatGPT4": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleChatGPT4-3848686444615242376d-build.zip"
+          "s3Key": "amplify-builds/handleChatGPT4-3848686444615242376d-build.zip",
+          "openaiApiKey": "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"
         }
       },
       "storage": {

@@ -265,6 +265,14 @@
         }
       ]
     },
+    "AMPLIFY_function_handleChatGPT4_openaiApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleChatGPT4"
+        }
+      ]
+    },
     "AMPLIFY_function_handleChatGPT4_s3Key": {
       "usedBy": [
         {
