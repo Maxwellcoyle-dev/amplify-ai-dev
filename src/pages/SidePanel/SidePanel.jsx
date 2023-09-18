@@ -14,17 +14,17 @@ import useGetThreads from "../../hooks/useGetThreads";
 import useGetThread from "../../hooks/useGetThread";
 
 // Ant UI
-import { RightOutlined, PlusOutlined } from "@ant-design/icons";
+import { RightOutlined, PlusOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Menu, Typography, Space, Button } from "antd";
 
-// styles
-import styles from "./SidePanel.module.css";
+// Components
+import SidePanelHeader from "../../components/SidePanelHeader/SidePanelHeader";
 
 const { Item } = Menu;
 
 const newThreadUUID = uuidv4();
 
-const SidePanel = ({ setCollapsed }) => {
+const SidePanel = () => {
   const dispatch = useContext(AppDispatchContext);
   const { threadData } = useContext(AppStateContext);
 
@@ -50,10 +50,8 @@ const SidePanel = ({ setCollapsed }) => {
   return (
     <>
       <div className="demo-logo-vertical" />
-      <Space className={styles.siderHeader}>
-        <Typography>Welcome User</Typography>
-        <Button>Sign Out</Button>
-      </Space>
+      <SidePanelHeader />
+
       <Menu
         defaultSelectedKeys={[newThreadUUID]}
         mode="vertical"

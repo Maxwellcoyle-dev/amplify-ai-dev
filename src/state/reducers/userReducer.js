@@ -1,13 +1,20 @@
 import { SET_USER } from "../actions/actionTypes";
 
-const initialState = {
-  user: null,
+export const initialState = {
+  user: {
+    userID: "",
+    token: "",
+  },
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, user: action.payload };
+      return {
+        ...state,
+        userID: action.payload.userID,
+        token: action.payload.token,
+      };
     default:
       return state;
   }

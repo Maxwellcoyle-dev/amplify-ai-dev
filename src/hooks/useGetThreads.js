@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 // Context & Actions
-import { AppDispatchContext, AppStateContext } from "../state/AppContext";
+import { AppDispatchContext } from "../state/AppContext";
 import { SET_THREADS } from "../state/actions/actionTypes";
 
 // Amplify API
@@ -31,6 +31,7 @@ const useGetThreads = () => {
 
     API.post(myAPI, path, init)
       .then((response) => {
+        console.log(response);
         const mappedResponse = response.map((item) => {
           return {
             userID: item.UserID.S,

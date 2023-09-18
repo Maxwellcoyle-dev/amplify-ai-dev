@@ -32,7 +32,7 @@ async function queryTable(UserID) {
   }
 }
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   try {
     // Handle possible preflight requests
     if (event.httpMethod === "OPTIONS") {

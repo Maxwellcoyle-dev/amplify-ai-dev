@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Context Provider
 import AppProvider from "./state/AppProvider";
@@ -18,11 +18,10 @@ import TopBar from "./components/TopBar/TopBar";
 // Amplify API
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import { Auth } from "aws-amplify";
 
 const { Header, Sider, Content } = Layout;
 
-const App = ({ authUser }) => {
+const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [showAttachmentModal, setShowAttachmentModal] = useState(false);
 
@@ -43,11 +42,7 @@ const App = ({ authUser }) => {
         </Sider>
         <Layout>
           <Header className={topBarStyles.topBar}>
-            <TopBar
-              user={authUser}
-              showAttachmentModal={showAttachmentModal}
-              setShowAttachmentModal={setShowAttachmentModal}
-            />
+            <TopBar setShowAttachmentModal={setShowAttachmentModal} />
           </Header>
           <Content>
             <Main

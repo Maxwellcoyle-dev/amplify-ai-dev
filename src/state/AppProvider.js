@@ -4,9 +4,10 @@ import { AppStateContext, AppDispatchContext } from "./AppContext";
 import rootReducer from "./reducers/rootReducer";
 
 import { initialState as threadInitialState } from "./reducers/threadReducer";
+import { initialState as userInitialState } from "./reducers/userReducer";
 
 const initialState = {
-  user: null,
+  user: userInitialState,
   threadData: threadInitialState,
   files: [],
   threadFiles: {},
