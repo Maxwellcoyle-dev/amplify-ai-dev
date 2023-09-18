@@ -12,8 +12,8 @@ const useDeleteFile = () => {
 
   const { getThread } = useGetThread();
 
-  const myAPI = `threadapi`;
-  const path = `/fileDeletion`;
+  const myAPI = `trainicityAiAPI`;
+  const path = `/deleteFile`;
 
   const deleteFile = async (fileKey, threadID) => {
     const user = await Auth.currentAuthenticatedUser(); // Get the current user

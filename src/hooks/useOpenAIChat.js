@@ -18,8 +18,8 @@ const useOpenAIChat = () => {
 
   const { setUpdateCurrentThread } = usePushCurrentThread();
 
-  const myAPI = `trainicityAIGateway`;
-  const path = `/chat`;
+  const myAPI = `trainicityAiAPI`;
+  const path = `/chatGPT4`;
 
   const fetchChat = async (userMessage) => {
     const user = await Auth.currentAuthenticatedUser();

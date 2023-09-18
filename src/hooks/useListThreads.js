@@ -7,8 +7,8 @@ import { SET_THREADS } from "../state/actions/actionTypes";
 // Amplify API
 import { API, Auth } from "aws-amplify";
 
-const myAPI = `threadapi`;
-const path = `/listThreads`;
+const myAPI = `trainicityAiAPI`;
+const path = `/getThreadsList`;
 
 const useListThreads = () => {
   const dispatch = useContext(AppDispatchContext);

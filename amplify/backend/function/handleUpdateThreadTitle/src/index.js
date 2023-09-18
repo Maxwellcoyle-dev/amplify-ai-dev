@@ -19,7 +19,7 @@ const updateThread = async (requestBody) => {
   const newTitle = parsedRequestBody.threadTitle;
 
   const params = {
-    TableName: "threadTable-staging",
+    TableName: "amplifyAiProjectTable-dev",
     Key: {
       UserID: { S: parsedRequestBody.userID },
       ThreadID: { S: parsedRequestBody.threadID },

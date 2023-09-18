@@ -27,7 +27,7 @@ const deleteFileFromBucket = async (fileKey) => {
 
   try {
     const params = {
-      Bucket: "trainciity-ai-bucket191812-staging",
+      Bucket: "amplifyaistoragebucket134815-dev",
       Key: fileKey,
     };
     const response = await s3Client.send(new DeleteObjectCommand(params));
@@ -46,7 +46,7 @@ const deleteFileFromDynamoDB = async (userID, threadID, fileKeyToRemove) => {
   console.log("fileKey: ", fileKeyToRemove);
 
   const getParams = {
-    TableName: "threadTable-staging",
+    TableName: "amplifyAiProjectTable-dev",
     Key: {
       UserID: { S: userID },
       ThreadID: { S: threadID },
@@ -63,7 +63,7 @@ const deleteFileFromDynamoDB = async (userID, threadID, fileKeyToRemove) => {
 
   try {
     const updateParams = {
-      TableName: "threadTable-staging",
+      TableName: "amplifyAiProjectTable",
       Key: {
         UserID: { S: userID },
         ThreadID: { S: threadID },

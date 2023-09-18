@@ -11,7 +11,7 @@ const getThread = async (requestBody) => {
   const parsedRequestBody = JSON.parse(requestBody);
 
   const params = {
-    TableName: "threadTable-staging",
+    TableName: "amplifyAiProjectTable-dev",
     Key: {
       UserID: { S: parsedRequestBody.userID },
       ThreadID: { S: parsedRequestBody.threadID },
@@ -40,7 +40,7 @@ const putThread = async (requestBody) => {
   }));
 
   const params = {
-    TableName: "threadTable-staging",
+    TableName: "amplifyAiProjectTable-dev",
     Key: {
       UserID: { S: parsedRequestBody.userID },
       ThreadID: { S: parsedRequestBody.threadID },
@@ -77,7 +77,7 @@ const updateThread = async (requestBody) => {
   }));
 
   const params = {
-    TableName: "threadTable-staging",
+    TableName: "amplifyAiProjectTable-dev",
     Key: {
       UserID: { S: parsedRequestBody.userID },
       ThreadID: { S: parsedRequestBody.threadID },

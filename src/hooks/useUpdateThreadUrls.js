@@ -12,7 +12,7 @@ const useUpdateThreadUrls = () => {
 
   const { getThread } = useGetThread();
 
-  const myAPI = `threadapi`;
+  const myAPI = `trainicityAiAPI`;
   const path = `/updateThreadUrls`;
 
   const updateThreadUrls = async (urlList, threadID) => {

@@ -1,51 +1,38 @@
 /* Amplify Params - DO NOT EDIT
 	ENV
 	REGION
-	STORAGE_THREADTABLE_ARN
-	STORAGE_THREADTABLE_NAME
-	STORAGE_THREADTABLE_STREAMARN
-Amplify Params - DO NOT EDIT */
+	STORAGE_AMPLIFYAIPROJECTTABLE_ARN
+	STORAGE_AMPLIFYAIPROJECTTABLE_NAME
+	STORAGE_AMPLIFYAIPROJECTTABLE_STREAMARN
+Amplify Params - DO NOT EDIT */ const {
+  DynamoDBClient,
+  QueryCommand,
+} = require("@aws-sdk/client-dynamodb");
+const docClient = new DynamoDBClient({ region: "us-east-2" });
 
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 
-const {
-  DynamoDBClient,
-  UpdateItemCommand,
-} = require("@aws-sdk/client-dynamodb");
-const REGION = "us-east-2";
-const ddbClient = new DynamoDBClient({ region: REGION });
-
-const updateThread = async (urlList, userID, threadID) => {
-  const urlsForDynamo = urlList.map((url) => ({
-    M: {
-      url: { S: url },
-    },
-  }));
-
+async function queryTable(UserID) {
   const params = {
-    TableName: "threadTable-staging",
-    Key: {
-      UserID: { S: userID },
-      ThreadID: { S: threadID },
-    },
-    UpdateExpression: "SET URLs = :urls",
+    TableName: "amplifyAiProjectTable-dev", // replace with your table name
+    KeyConditionExpression: "UserID = :userid",
     ExpressionAttributeValues: {
-      ":urls": { L: urlsForDynamo },
+      ":userid": { S: UserID },
     },
   };
 
   try {
-    const data = await ddbClient.send(new UpdateItemCommand(params));
-    console.log("Success", data);
-    return data;
+    const data = await docClient.send(new QueryCommand(params));
+    console.log("Success", data.Items);
+    return data.Items;
   } catch (err) {
-    console.error("Error", err);
+    console.error(err);
   }
-};
+}
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
   try {
     // Handle possible preflight requests
     if (event.httpMethod === "OPTIONS") {
@@ -66,26 +53,22 @@ exports.handler = async (event) => {
       console.log(`CLAIMS: `, event.requestContext?.authorizer?.claims);
     }
 
-    // the actual code here
-    if (event.httpMethod !== "POST") {
+    const body = JSON.parse(event.body);
+    const UserID = body.userID;
+    const items = await queryTable(UserID);
+
+    if (items.length === 0) {
+      console.log("No items found");
       return {
-        statusCode: 400,
+        statusCode: 404,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "*",
           "Access-Control-Allow-Headers": "*",
         },
-        body: JSON.stringify({ error: "Only POST requests are supported" }),
+        body: JSON.stringify({ message: "No items found" }),
       };
     }
-
-    const body = JSON.parse(event.body);
-
-    const updateThreadResponse = await updateThread(
-      body.urls,
-      body.userID,
-      body.threadID
-    );
 
     return {
       statusCode: 200,
@@ -94,20 +77,18 @@ exports.handler = async (event) => {
         "Access-Control-Allow-Methods": "*",
         "Access-Control-Allow-Headers": "*",
       },
-      body: JSON.stringify(updateThreadResponse), // convert items to JSON string
+      body: JSON.stringify(items), // convert items to JSON string
     };
-  } catch (error) {
-    console.log(error);
-    console.log("Error message:", error.message);
-    console.log("Stack trace:", error.stack);
+  } catch (err) {
+    console.error(err);
     return {
-      statusCode: 400,
+      statusCode: 500,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "*",
         "Access-Control-Allow-Headers": "*",
       },
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ message: "Internal Server Error" }),
     };
   }
 };

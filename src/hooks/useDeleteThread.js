@@ -14,7 +14,7 @@ const useDeleteThread = () => {
   const dispatch = useContext(AppDispatchContext);
   const { getThreads } = useListThreads();
 
-  const myAPI = `threadapi`;
+  const myAPI = `trainicityAiAPI`;
   const path = `/deleteThread`;
 
   const deleteThread = async (threadId) => {

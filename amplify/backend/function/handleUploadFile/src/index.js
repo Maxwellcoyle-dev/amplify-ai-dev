@@ -33,7 +33,7 @@ const putFileToBucket = async (body) => {
 
   //   Define S3 object params
   const params = {
-    Bucket: "trainciity-ai-bucket191812-staging",
+    Bucket: "amplifyaistoragebucket134815-dev",
     Key: `${requestBody.userID}/${requestBody.threadID}/${requestBody.fileName}`,
     Body: fileBuffer,
   };
@@ -44,7 +44,7 @@ const putFileToBucket = async (body) => {
 
     const returnBody = {
       fileName: requestBody.fileName,
-      fileURL: `https://trainciity-ai-bucket191812-staging.s3.us-east-2.amazonaws.com/${requestBody.userID}/${requestBody.threadID}/${requestBody.fileName}`,
+      fileURL: `https://amplifyaistoragebucket134815-dev.s3.us-east-2.amazonaws.com/${requestBody.userID}/${requestBody.threadID}/${requestBody.fileName}`,
       fileKey: `${requestBody.userID}/${requestBody.threadID}/${requestBody.fileName}`,
       userID: requestBody.userID,
       threadID: requestBody.threadID,
@@ -66,7 +66,7 @@ const updateDBTable = async (userID, threadID, fileName, fileKey, fileURL) => {
 
   try {
     const params = {
-      TableName: "threadTable-staging",
+      TableName: "amplifyAiProjectTable-dev",
       Key: {
         UserID: { S: userID },
         ThreadID: { S: threadID },

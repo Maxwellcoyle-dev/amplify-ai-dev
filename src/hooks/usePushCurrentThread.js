@@ -15,7 +15,7 @@ const usePushCurrentThread = () => {
   const { getThreads } = useGetThreads();
   const { threadData } = useContext(AppStateContext);
 
-  const myAPI = `threadapi`;
+  const myAPI = `trainicityAiAPI`;
   const path = `/currentThread`;
 
   useEffect(() => {

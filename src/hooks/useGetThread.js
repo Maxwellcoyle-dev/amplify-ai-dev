@@ -10,7 +10,7 @@ import { API, Auth } from "aws-amplify";
 const useGetThread = () => {
   const dispatch = useContext(AppDispatchContext);
 
-  const myAPI = `threadapi`;
+  const myAPI = `trainicityAiAPI`;
   const path = `/getThread`;
 
   const getThread = async (threadID) => {

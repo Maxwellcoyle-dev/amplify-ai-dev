@@ -12,8 +12,8 @@ const useFileUpload = () => {
 
   const { getThread } = useGetThread();
 
-  const myAPI = `threadapi`;
-  const path = `/fileUpload`;
+  const myAPI = `trainicityAiAPI`;
+  const path = `/uploadFile`;
 
   let cancelUpload;
 

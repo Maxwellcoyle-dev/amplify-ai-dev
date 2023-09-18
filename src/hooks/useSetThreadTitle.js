@@ -7,8 +7,8 @@ import { API, Auth } from "aws-amplify";
 const useSetThreadTitle = () => {
   const { getThreads } = useListThreads();
 
-  const myAPI = `threadapi`;
-  const path = `/updateTitle`;
+  const myAPI = `trainicityAiAPI`;
+  const path = `/updateThreadTitle`;
 
   const setTitle = async (threadId, newTitle) => {
     const user = await Auth.currentAuthenticatedUser(); // Get the current user
