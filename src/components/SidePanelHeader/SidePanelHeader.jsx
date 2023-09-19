@@ -16,13 +16,17 @@ import { Typography, Space, Button } from "antd";
 // Styles
 import styles from "./SidePanelHeader.module.css";
 
-const SidePanelHeader = () => {
+const SidePanelHeader = ({ collapsed }) => {
   const { getUser, userLoading } = useGetUser(); // Custom hook for getting a single user
   const { user } = useContext(AppStateContext);
 
   useEffect(() => {
     getUser(); // Get the user from the database
   }, []);
+
+  useEffect(() => {
+    console.log(collapsed);
+  }, [collapsed]);
 
   const handleSignOutClick = async () => {
     try {
@@ -35,7 +39,9 @@ const SidePanelHeader = () => {
 
   return (
     <Space className={styles.container}>
-      <Typography.Text>{user?.userID?.split("@")[0]}</Typography.Text>
+      {!collapsed && (
+        <Typography.Text>{user?.userID?.split("@")[0]}</Typography.Text>
+      )}
       <Button onClick={handleSignOutClick}>
         <LogoutOutlined />
       </Button>

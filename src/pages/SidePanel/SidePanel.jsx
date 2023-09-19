@@ -14,24 +14,22 @@ import useGetThreads from "../../hooks/useGetThreads";
 import useGetThread from "../../hooks/useGetThread";
 
 // Ant UI
-import { RightOutlined, PlusOutlined } from "@ant-design/icons";
-import { List, Menu, Button } from "antd";
+import { PlusOutlined, RightOutlined } from "@ant-design/icons";
+import { Menu } from "antd";
 
 // Components
 import SidePanelHeader from "../../components/SidePanelHeader/SidePanelHeader";
 
-const { Item } = Menu;
-
 const newThreadUUID = uuidv4();
 
-const SidePanel = () => {
+const SidePanel = ({ collapsed }) => {
   const dispatch = useContext(AppDispatchContext);
   const { threadData } = useContext(AppStateContext);
 
   // current threadID
   const currentThreadID = threadData?.currentThread?.threadID;
 
-  const { getThreads, threadsLoading, threadsExist } = useGetThreads(); // Custom hook for getting all threads
+  const { getThreads, threadsLoading } = useGetThreads(); // Custom hook for getting all threads
   const { getThread } = useGetThread(); // Custom hook for getting a single thread
 
   useEffect(() => {
@@ -50,34 +48,30 @@ const SidePanel = () => {
   return (
     <>
       <div className="demo-logo-vertical" />
-      <SidePanelHeader />
+      <SidePanelHeader collapsed={collapsed} />
 
       <Menu
         defaultSelectedKeys={[newThreadUUID]}
         mode="vertical"
-        selectedKeys={currentThreadID ? [currentThreadID] : [newThreadUUID]}
+        selectedKeys={currentThreadID ? currentThreadID : newThreadUUID}
       >
-        <Item
+        <Menu.Item
           key={newThreadUUID}
           icon={<PlusOutlined />}
           onClick={createNewThread}
         >
           New Thread
-        </Item>
+        </Menu.Item>
         {/* Map through the threads and create Menu items for each */}
-        <List
-          dataSource={threadData.threads}
-          loading={threadsLoading}
-          renderItem={(item) => (
-            <List.Item
-              key={item.threadID}
-              icon={<RightOutlined />}
-              onClick={() => openThread(item.threadID)}
-            >
-              <Button size="large">{item.threadTitle}</Button>
-            </List.Item>
-          )}
-        />
+        {threadData?.threads?.map((thread) => (
+          <Menu.Item
+            key={thread.threadID}
+            icon={<RightOutlined />}
+            onClick={() => openThread(thread.threadID)}
+          >
+            {thread.threadTitle}
+          </Menu.Item>
+        ))}
       </Menu>
     </>
   );

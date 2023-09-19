@@ -102,6 +102,9 @@ const ThreadAttachmentsModal = ({
       onOk={() => setShowAttachmentModal(false)}
     >
       <Row gutter={24}>
+        <Typography.Title level={3} type="warning">
+          This Section is Under Construction - Coming Soon.
+        </Typography.Title>
         <Col>
           <Typography.Title level={4}>File Attachments</Typography.Title>
         </Col>

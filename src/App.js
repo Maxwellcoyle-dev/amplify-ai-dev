@@ -38,7 +38,7 @@ const App = () => {
           onCollapse={handleCollapse}
           theme="light"
         >
-          <SidePanel setCollapsed={setCollapsed} />
+          <SidePanel setCollapsed={setCollapsed} collapsed={collapsed} />
         </Sider>
         <Layout>
           <Header className={topBarStyles.topBar}>
