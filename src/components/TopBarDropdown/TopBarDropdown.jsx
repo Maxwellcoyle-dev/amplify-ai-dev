@@ -22,10 +22,9 @@ const TopBarDropdown = () => {
       <Select
         size="large"
         style={{ width: 200 }}
-        defaultValue="Course Writer"
         placeholder="Select a Mode"
         onChange={handleChange}
-        filterOption={(option) => option?.label ?? "Course Writer"}
+        filterOption={(option) => option?.label ?? option[0]}
         options={[
           {
             value: "GPT4",
