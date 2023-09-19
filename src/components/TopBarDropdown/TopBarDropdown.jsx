@@ -28,20 +28,8 @@ const TopBarDropdown = () => {
         filterOption={(option) => option?.label ?? "Course Writer"}
         options={[
           {
-            value: "Course Writer",
-            label: "Course Writer",
-          },
-          {
-            value: "Transcript Analyzer",
-            label: "Transcript Analyzer",
-          },
-          {
-            value: "Content Analyzer",
-            label: "Content Analyzer",
-          },
-          {
-            value: "Course Planner",
-            label: "Course Planner",
+            value: "GPT4",
+            label: "GPT4",
           },
         ]}
       />

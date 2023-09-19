@@ -77,16 +77,9 @@ exports.handler = async (event) => {
     // Construct the data payload based on what you want to ask OpenAI.
     // Adjust this according to your needs.
     const payload = {
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "system",
-          content:
-            "you are an expert instructional designer providing creative solutions based on industry best practices to solve complex problems and answer questions in detail.",
-        },
-        ...conversation,
-      ],
-      max_tokens: 200,
+      model: "gpt-4",
+      messages: [...conversation],
+      max_tokens: 6000,
     };
 
     console.log(`PAYLOAD: ${JSON.stringify(payload)}`); // Log the payload
