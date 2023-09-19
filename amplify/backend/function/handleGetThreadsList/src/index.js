@@ -4,10 +4,9 @@
 	STORAGE_AMPLIFYAIPROJECTTABLE_ARN
 	STORAGE_AMPLIFYAIPROJECTTABLE_NAME
 	STORAGE_AMPLIFYAIPROJECTTABLE_STREAMARN
-Amplify Params - DO NOT EDIT */ const {
-  DynamoDBClient,
-  QueryCommand,
-} = require("@aws-sdk/client-dynamodb");
+Amplify Params - DO NOT EDIT */
+
+const { DynamoDBClient, QueryCommand } = require("@aws-sdk/client-dynamodb");
 const docClient = new DynamoDBClient({ region: "us-east-2" });
 
 /**
@@ -60,13 +59,13 @@ exports.handler = async (event) => {
     if (items.length === 0) {
       console.log("No items found");
       return {
-        statusCode: 404,
+        statusCode: 200,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "*",
           "Access-Control-Allow-Headers": "*",
         },
-        body: JSON.stringify({ message: "No items found" }),
+        body: JSON.stringify([]),
       };
     }
 

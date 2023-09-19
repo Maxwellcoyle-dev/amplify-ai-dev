@@ -5,14 +5,14 @@ import { AppDispatchContext } from "../state/AppContext";
 import { RESET_CURRENT_THREAD } from "../state/actions/actionTypes";
 
 // Custom Hooks
-import useListThreads from "./useListThreads";
+import useGetThreads from "./useGetThreads";
 
 // Amplify API
 import { API, Auth } from "aws-amplify";
 
 const useDeleteThread = () => {
   const dispatch = useContext(AppDispatchContext);
-  const { getThreads } = useListThreads();
+  const { getThreads } = useGetThreads();
 
   const myAPI = `trainicityAiAPI`;
   const path = `/deleteThread`;

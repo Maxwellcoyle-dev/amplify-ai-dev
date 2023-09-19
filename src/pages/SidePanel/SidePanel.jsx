@@ -14,8 +14,8 @@ import useGetThreads from "../../hooks/useGetThreads";
 import useGetThread from "../../hooks/useGetThread";
 
 // Ant UI
-import { RightOutlined, PlusOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Menu, Typography, Space, Button } from "antd";
+import { RightOutlined, PlusOutlined } from "@ant-design/icons";
+import { List, Menu, Button } from "antd";
 
 // Components
 import SidePanelHeader from "../../components/SidePanelHeader/SidePanelHeader";
@@ -31,7 +31,7 @@ const SidePanel = () => {
   // current threadID
   const currentThreadID = threadData?.currentThread?.threadID;
 
-  const { getThreads } = useGetThreads(); // Custom hook for getting all threads
+  const { getThreads, threadsLoading, threadsExist } = useGetThreads(); // Custom hook for getting all threads
   const { getThread } = useGetThread(); // Custom hook for getting a single thread
 
   useEffect(() => {
@@ -65,15 +65,19 @@ const SidePanel = () => {
           New Thread
         </Item>
         {/* Map through the threads and create Menu items for each */}
-        {threadData?.threads?.map((thread, i) => (
-          <Item
-            key={thread.threadID}
-            icon={<RightOutlined />}
-            onClick={() => openThread(thread.threadID)}
-          >
-            {thread.threadTitle}
-          </Item>
-        ))}
+        <List
+          dataSource={threadData.threads}
+          loading={threadsLoading}
+          renderItem={(item) => (
+            <List.Item
+              key={item.threadID}
+              icon={<RightOutlined />}
+              onClick={() => openThread(item.threadID)}
+            >
+              <Button size="large">{item.threadTitle}</Button>
+            </List.Item>
+          )}
+        />
       </Menu>
     </>
   );

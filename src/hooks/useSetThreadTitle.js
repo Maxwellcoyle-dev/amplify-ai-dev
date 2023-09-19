@@ -1,11 +1,11 @@
 // Custom Hooks
-import useListThreads from "./useListThreads";
+import useGetThreads from "./useGetThreads";
 
 // Amplify API
 import { API, Auth } from "aws-amplify";
 
 const useSetThreadTitle = () => {
-  const { getThreads } = useListThreads();
+  const { getThreads } = useGetThreads();
 
   const myAPI = `trainicityAiAPI`;
   const path = `/updateThreadTitle`;

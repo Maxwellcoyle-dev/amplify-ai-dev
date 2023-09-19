@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 // Context & Actions
 import { AppDispatchContext } from "../state/AppContext";
@@ -11,11 +11,18 @@ const myAPI = `trainicityAiAPI`;
 const path = `/getThreadsList`;
 
 const useGetThreads = () => {
+  const [threadsExist, setThreadsExist] = useState(false);
+  const [threadsLoading, setThreadsLoading] = useState(false);
+  const [threadsError, setThreadsError] = useState(null);
+
   const dispatch = useContext(AppDispatchContext);
 
   const getThreads = async () => {
     const user = await Auth.currentAuthenticatedUser();
     if (!user) return console.log("No user"); // Check for an Authenticated User
+
+    setThreadsLoading(true);
+    setThreadsError(null);
 
     const token = user.signInUserSession.idToken.jwtToken;
 
@@ -32,6 +39,14 @@ const useGetThreads = () => {
     API.post(myAPI, path, init)
       .then((response) => {
         console.log(response);
+        if (response.length === 0) {
+          setThreadsExist(false);
+          setThreadsLoading(false);
+          return;
+        }
+
+        setThreadsExist(true);
+
         const mappedResponse = response.map((item) => {
           return {
             userID: item.UserID.S,
@@ -41,13 +56,22 @@ const useGetThreads = () => {
           };
         });
 
+        setThreadsLoading(false);
+
         dispatch({ type: SET_THREADS, payload: mappedResponse });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setThreadsLoading(false);
+        setThreadsError(error);
+      });
   };
 
   return {
     getThreads,
+    threadsExist,
+    threadsLoading,
+    threadsError,
   };
 };
 

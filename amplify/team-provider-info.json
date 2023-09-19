@@ -15,7 +15,7 @@
       "function": {
         "handleGetThreadsList": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleGetThreadsList-6a4357696e3541464338-build.zip"
+          "s3Key": "amplify-builds/handleGetThreadsList-646743567a6e7a376750-build.zip"
         },
         "handleDeleteThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
@@ -47,8 +47,8 @@
         },
         "handleChatGPT4": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleChatGPT4-3848686444615242376d-build.zip",
-          "openaiApiKey": "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"
+          "s3Key": "amplify-builds/handleChatGPT4-7754544a3146624f5557-build.zip",
+          "secretsPathAmplifyAppId": "d7unl533h0att"
         }
       },
       "storage": {

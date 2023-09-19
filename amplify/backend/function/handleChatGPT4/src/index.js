@@ -1,3 +1,17 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["OPENAI_API_KEY"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
 /* Amplify Params - DO NOT EDIT
 	ENV
 	REGION
@@ -9,6 +23,11 @@ Amplify Params - DO NOT EDIT */
  */
 
 const axios = require("axios");
+
+const {
+  SecretsManagerClient,
+  GetSecretValueCommand,
+} = require("@aws-sdk/client-secrets-manager");
 
 exports.handler = async (event) => {
   try {
@@ -30,6 +49,20 @@ exports.handler = async (event) => {
     if (event.requestContext.authorizer) {
       console.log(`CLAIMS: `, event.requestContext.authorizer.claims);
     }
+
+    const secret_name = "amplify-ai-project/dev/openaikey";
+
+    const client = new SecretsManagerClient({
+      region: "us-east-2",
+    });
+
+    // Retrieve the secret value from Secrets Manager
+    const openAiSecret = await client.send(
+      new GetSecretValueCommand({ SecretId: secret_name })
+    );
+
+    const apiKey = openAiSecret.SecretString;
+    const OPENAI_API_KEY = JSON.parse(apiKey).OPENAI_API_KEY;
 
     // Parse the body as JSON
     const body = JSON.parse(event.body);
@@ -62,7 +95,7 @@ exports.handler = async (event) => {
       const apiResponse = await axios.post(openaiEndpoint, payload, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
         },
       });
 
