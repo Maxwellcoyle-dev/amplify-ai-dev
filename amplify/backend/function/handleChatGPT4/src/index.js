@@ -79,7 +79,7 @@ exports.handler = async (event) => {
     const payload = {
       model: "gpt-4",
       messages: [...conversation],
-      max_tokens: 6000,
+      max_tokens: 2000,
     };
 
     console.log(`PAYLOAD: ${JSON.stringify(payload)}`); // Log the payload
