@@ -38,7 +38,6 @@ const useGetThreads = () => {
 
     API.post(myAPI, path, init)
       .then((response) => {
-        console.log(response);
         if (response.length === 0) {
           setThreadsExist(false);
           setThreadsLoading(false);

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -13,6 +13,9 @@ import usePushCurrentThread from "./usePushCurrentThread";
 import { API, Auth } from "aws-amplify";
 
 const useOpenAIChat = () => {
+  const [chatLoading, setChatLoading] = useState(false);
+  const [chatError, setChatError] = useState(false);
+
   const state = useContext(AppStateContext);
   const dispatch = useContext(AppDispatchContext);
 
@@ -22,6 +25,9 @@ const useOpenAIChat = () => {
   const path = `/chatGPT4`;
 
   const fetchChat = async (userMessage) => {
+    setChatLoading(true);
+    setChatError(false);
+
     const user = await Auth.currentAuthenticatedUser();
     const token = user.signInUserSession.idToken.jwtToken;
 
@@ -64,17 +70,20 @@ const useOpenAIChat = () => {
             messageID: assistantMessageID,
           },
         });
+        setChatLoading(false);
+        setUpdateCurrentThread(true);
       })
       .catch((error) => {
+        setChatError(true);
         console.log("API Error: ", error);
-      })
-      .finally(() => {
-        setUpdateCurrentThread(true);
+        setChatLoading(false);
       });
   };
 
   return {
     fetchChat,
+    chatLoading,
+    chatError,
   };
 };
 

@@ -26,8 +26,6 @@ const usePushCurrentThread = () => {
   }, [updateCurrentThread]);
 
   const pushThread = async () => {
-    console.log("Pushing thread");
-    console.log(threadData.currentThread);
     const currentThreadID = threadData.currentThread.threadID; // Get the current threadID
     const currentThreadMessages = threadData.currentThread.messages; // Get the current thread messages
     const threadTitle = threadData.currentThread.threadTitle; // Get the current thread title
@@ -66,7 +64,6 @@ const usePushCurrentThread = () => {
 
     API.post(myAPI, path, init)
       .then((response) => {
-        console.log("response: ", response);
         getThreads();
       })
       .catch((error) => console.log(error));

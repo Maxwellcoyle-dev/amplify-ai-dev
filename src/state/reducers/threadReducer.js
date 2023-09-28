@@ -63,7 +63,6 @@ const threadReducer = (state = initialState, action) => {
       };
 
     case ADD_MESSAGE:
-      console.log("action.payload: ", action.payload);
       const timeStamp = new Date().getTime().toString();
       // Add the new message to the currentThread.messages array
       const updatedMessages = [
@@ -80,7 +79,6 @@ const threadReducer = (state = initialState, action) => {
         messages: updatedMessages,
         lastUpdated: timeStamp,
       };
-      console.log("updatedThread: ", updatedThread);
       return {
         ...state,
         currentThread: updatedThread,
@@ -146,7 +144,6 @@ const threadReducer = (state = initialState, action) => {
       const updatedMessagesArray = state.currentThread.messages.filter(
         (message) => message.messageID !== action.payload
       );
-      console.log(updatedMessagesArray);
       // Create a new currentThread object with the updatedMessages array
       const updatedThreadObject = {
         ...state.currentThread,
@@ -256,7 +253,6 @@ const threadReducer = (state = initialState, action) => {
       };
 
     case SET_CURRENT_THREAD_URLS:
-      console.log("action.payload: ", action.payload);
       const updatedURLS = action.payload;
       return {
         ...state,

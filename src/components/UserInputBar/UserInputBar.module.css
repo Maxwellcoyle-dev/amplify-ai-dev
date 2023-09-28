@@ -5,4 +5,13 @@
   gap: 0.25rem;
   width: 100%;
   align-items: end;
+  justify-content: center;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-left: 0.5rem;
 }

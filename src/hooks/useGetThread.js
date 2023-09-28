@@ -1,7 +1,7 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 // Context & Actions
-import { AppStateContext, AppDispatchContext } from "../state/AppContext";
+import { AppDispatchContext } from "../state/AppContext";
 import { GET_CURRENT_THREAD } from "../state/actions/actionTypes";
 
 // Amplify API

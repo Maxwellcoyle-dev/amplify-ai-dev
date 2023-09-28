@@ -29,7 +29,8 @@ const {
   GetSecretValueCommand,
 } = require("@aws-sdk/client-secrets-manager");
 
-exports.handler = async (event) => {
+exports.handler = awslambda.streamifyResponse(async (event, responseStream) => {
+  responseStream.setContentType("application/json");
   try {
     // Handle possible preflight requests
     if (event.httpMethod === "OPTIONS") {
@@ -80,6 +81,7 @@ exports.handler = async (event) => {
       model: "gpt-4",
       messages: [...conversation],
       max_tokens: 2000,
+      stream: true,
     };
 
     console.log(`PAYLOAD: ${JSON.stringify(payload)}`); // Log the payload
@@ -90,6 +92,7 @@ exports.handler = async (event) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${OPENAI_API_KEY}`,
         },
+        responseType: "stream",
       });
 
       console.log(`API RESPONSE: ${JSON.stringify(apiResponse.data)}`); // Log the API response
@@ -137,4 +140,4 @@ exports.handler = async (event) => {
       body: JSON.stringify({ error: error.message }),
     };
   }
-};
+});
