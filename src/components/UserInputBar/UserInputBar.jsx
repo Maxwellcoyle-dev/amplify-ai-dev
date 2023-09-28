@@ -10,7 +10,7 @@ import TextEntry from "../TextEntry/TextEntry";
 import useOpenAIChat from "../../hooks/useOpenAIChat";
 
 // Ant UI
-import { Button, Spin } from "antd";
+import { Button, Space, Spin, Typography } from "antd";
 
 // Styles
 import styles from "./UserInputBar.module.css";
@@ -20,19 +20,23 @@ const UserInputBar = () => {
 
   const { fetchChat, chatLoading } = useOpenAIChat();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     fetchChat(value);
     setValue("");
   };
 
   return (
     <div className={styles.container}>
-      <TextEntry
-        value={value}
-        setValue={setValue}
-        handleSubmit={handleSubmit}
-      />
+      <div className={styles.TextEntryDiv}>
+        <TextEntry
+          value={value}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+        />
+        <Typography.Text type="secondary" className={styles.text}>
+          Shift + Enter to add a new line
+        </Typography.Text>
+      </div>
       {chatLoading ? (
         <Spin className={styles.loading} size="large" />
       ) : (

@@ -29,8 +29,7 @@ const {
   GetSecretValueCommand,
 } = require("@aws-sdk/client-secrets-manager");
 
-exports.handler = awslambda.streamifyResponse(async (event, responseStream) => {
-  responseStream.setContentType("application/json");
+exports.handler = async (event) => {
   try {
     // Handle possible preflight requests
     if (event.httpMethod === "OPTIONS") {
@@ -80,8 +79,7 @@ exports.handler = awslambda.streamifyResponse(async (event, responseStream) => {
     const payload = {
       model: "gpt-4",
       messages: [...conversation],
-      max_tokens: 2000,
-      stream: true,
+      max_tokens: 3000,
     };
 
     console.log(`PAYLOAD: ${JSON.stringify(payload)}`); // Log the payload
@@ -92,7 +90,6 @@ exports.handler = awslambda.streamifyResponse(async (event, responseStream) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${OPENAI_API_KEY}`,
         },
-        responseType: "stream",
       });
 
       console.log(`API RESPONSE: ${JSON.stringify(apiResponse.data)}`); // Log the API response
@@ -140,4 +137,4 @@ exports.handler = awslambda.streamifyResponse(async (event, responseStream) => {
       body: JSON.stringify({ error: error.message }),
     };
   }
-});
+};

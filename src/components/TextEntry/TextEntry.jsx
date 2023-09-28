@@ -14,7 +14,12 @@ const TextEntry = ({ value, setValue, handleSubmit }) => {
       type="textarea"
       size="large"
       styles={{ padding: "1rem" }}
-      onPressEnter={handleSubmit}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          handleSubmit();
+          e.preventDefault();
+        }
+      }}
       autoSize={{
         minRows: 1,
         maxRows: 6,
