@@ -35,7 +35,7 @@ const ChatContainer = ({ currentThread }) => {
           <ChatMessage
             key={message.messageID}
             persona={message.role}
-            message={message.content}
+            chatMessage={message.content}
             messageID={message.messageID}
             updateThread={updateThread}
             setUpdateThread={setUpdateThread}

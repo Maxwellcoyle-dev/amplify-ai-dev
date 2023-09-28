@@ -108,12 +108,19 @@ const threadReducer = (state = initialState, action) => {
       return { ...state, threads: sortedThreads };
 
     case DELETE_THREAD:
-      return {
-        ...state,
-        threads: state.threads.filter(
-          (thread) => thread.id !== action.payload.id
-        ),
-      };
+      try {
+        const newState = {
+          ...state,
+          threads: state.threads.filter(
+            (thread) => thread.threadID !== action.payload.threadID
+          ),
+        };
+        return {
+          newState,
+        };
+      } catch (err) {
+        console.error(err);
+      }
 
     case ADD_THREAD:
       const newThread = {
