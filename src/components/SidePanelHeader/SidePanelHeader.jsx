@@ -17,16 +17,12 @@ import { Typography, Space, Button } from "antd";
 import styles from "./SidePanelHeader.module.css";
 
 const SidePanelHeader = ({ collapsed }) => {
-  const { getUser, userLoading } = useGetUser(); // Custom hook for getting a single user
+  const { getUser } = useGetUser(); // Custom hook for getting a single user
   const { user } = useContext(AppStateContext);
 
   useEffect(() => {
     getUser(); // Get the user from the database
   }, []);
-
-  useEffect(() => {
-    console.log(collapsed);
-  }, [collapsed]);
 
   const handleSignOutClick = async () => {
     try {

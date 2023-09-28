@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 
-// Ant UI
-import { Layout } from "antd";
-
 // Styles
 import styles from "./Main.module.css";
+
+// Custom Hooks
+import useOpenAIChat from "../../hooks/useOpenAIChat";
 
 // Custom Components
 import UserInputBar from "../../components/UserInputBar/UserInputBar";
@@ -17,6 +17,8 @@ import { AppStateContext } from "../../state/AppContext";
 const Main = ({ showAttachmentModal, setShowAttachmentModal }) => {
   const { threadData } = useContext(AppStateContext);
 
+  const { chatError } = useOpenAIChat();
+
   return (
     <>
       <div className={styles.container}>
@@ -25,6 +27,7 @@ const Main = ({ showAttachmentModal, setShowAttachmentModal }) => {
           setShowAttachmentModal={setShowAttachmentModal}
         />
         <ChatContainer currentThread={threadData.currentThread} />
+        {chatError && <div>Error</div>}
         <UserInputBar />
       </div>
     </>

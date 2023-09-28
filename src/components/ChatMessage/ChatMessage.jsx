@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useContext, useEffect } from "react";
+import React, { forwardRef, useState, useContext } from "react";
 
 // Styles
 import styles from "./ChatMessage.module.css";

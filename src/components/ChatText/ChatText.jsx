@@ -13,7 +13,7 @@ import styles from "./ChatText.module.css";
 
 const ChatText = ({ text, isEditable, setEditorContent }) => {
   const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(ContentState.createFromText(text))
+    EditorState.createWithContent(ContentState.createFromText(text || ""))
   );
 
   const editor = useRef(null);

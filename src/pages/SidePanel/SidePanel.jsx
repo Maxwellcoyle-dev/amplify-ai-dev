@@ -15,7 +15,7 @@ import useGetThread from "../../hooks/useGetThread";
 
 // Ant UI
 import { PlusOutlined, RightOutlined } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Menu, Spin } from "antd";
 
 // Components
 import SidePanelHeader from "../../components/SidePanelHeader/SidePanelHeader";
@@ -63,15 +63,19 @@ const SidePanel = ({ collapsed }) => {
           New Thread
         </Menu.Item>
         {/* Map through the threads and create Menu items for each */}
-        {threadData?.threads?.map((thread) => (
-          <Menu.Item
-            key={thread.threadID}
-            icon={<RightOutlined />}
-            onClick={() => openThread(thread.threadID)}
-          >
-            {thread.threadTitle}
-          </Menu.Item>
-        ))}
+        {!threadsLoading ? (
+          threadData?.threads?.map((thread) => (
+            <Menu.Item
+              key={thread.threadID}
+              icon={<RightOutlined />}
+              onClick={() => openThread(thread.threadID)}
+            >
+              {thread.threadTitle}
+            </Menu.Item>
+          ))
+        ) : (
+          <Spin size="large" />
+        )}
       </Menu>
     </>
   );

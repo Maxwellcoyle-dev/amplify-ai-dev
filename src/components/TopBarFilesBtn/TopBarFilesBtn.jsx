@@ -1,18 +1,11 @@
-import React, { useContext } from "react";
-
-// State management
-import { AppStateContext } from "../../state/AppContext";
+import React from "react";
 
 // Ant Design
 import { Button } from "antd";
 
 const TopBarFilesBtn = ({ setShowAttachmentModal }) => {
-  const { threadData } = useContext(AppStateContext);
-  const currentThreadFiles = threadData?.currentThread?.files;
-
   const handleClick = (event) => {
     event.preventDefault();
-
     setShowAttachmentModal(true);
   };
 

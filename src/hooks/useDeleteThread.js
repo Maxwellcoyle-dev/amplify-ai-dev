@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 // State management
 import { AppDispatchContext } from "../state/AppContext";

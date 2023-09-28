@@ -37,7 +37,7 @@ const useGetUser = () => {
     }
   };
 
-  return { getUser, userLoading };
+  return { getUser, userLoading, userError };
 };
 
 export default useGetUser;
