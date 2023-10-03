@@ -6,9 +6,6 @@ import ChatMessage from "../ChatMessage/ChatMessage";
 // State Management
 import { AppStateContext } from "../../state/AppContext";
 
-// Custom Hooks
-import useOpenAIChat from "../../hooks/useOpenAIChat";
-
 // Styles
 import styles from "./ChatContainer.module.css";
 
@@ -16,8 +13,6 @@ const ChatContainer = ({ currentThread }) => {
   const [updateThread, setUpdateThread] = useState(false);
 
   const { threadData } = useContext(AppStateContext);
-
-  const { chatError } = useOpenAIChat();
 
   const lastMessageRef = useRef(null);
 
@@ -44,7 +39,6 @@ const ChatContainer = ({ currentThread }) => {
             }
           />
         ))}
-      {chatError && <p>Error!</p>}
     </div>
   );
 };

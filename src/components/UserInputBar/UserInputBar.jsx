@@ -7,7 +7,8 @@ import { SendOutlined } from "@ant-design/icons";
 import TextEntry from "../TextEntry/TextEntry";
 
 // Custom Hooks
-import useOpenAIChat from "../../hooks/useOpenAIChat";
+// import useOpenAIChat from "../../hooks/useOpenAIChat";
+import useLLMStream from "../../hooks/useLLMStream";
 
 // Ant UI
 import { Button, Space, Spin, Typography } from "antd";
@@ -18,10 +19,11 @@ import styles from "./UserInputBar.module.css";
 const UserInputBar = () => {
   const [value, setValue] = useState("");
 
-  const { fetchChat, chatLoading } = useOpenAIChat();
+  // const { fetchChat, chatLoading } = useOpenAIChat();
+  const { fetchChatStream, streamLoading } = useLLMStream();
 
-  const handleSubmit = () => {
-    fetchChat(value);
+  const handleSubmit = async () => {
+    await fetchChatStream(value);
     setValue("");
   };
 
@@ -37,7 +39,7 @@ const UserInputBar = () => {
           Shift + Enter to add a new line
         </Typography.Text>
       </div>
-      {chatLoading ? (
+      {streamLoading ? (
         <Spin className={styles.loading} size="large" />
       ) : (
         <Button

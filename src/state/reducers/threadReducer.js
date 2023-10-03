@@ -5,6 +5,7 @@ import {
   ADD_THREAD,
   DELETE_THREAD,
   ADD_MESSAGE,
+  ADD_MESSAGE_STREAM,
   DELETE_MESSAGE,
   EDIT_MESSAGE,
   RESET_CURRENT_THREAD,
@@ -65,24 +66,83 @@ const threadReducer = (state = initialState, action) => {
     case ADD_MESSAGE:
       const timeStamp = new Date().getTime().toString();
       // Add the new message to the currentThread.messages array
-      const updatedMessages = [
-        ...state.currentThread.messages,
-        {
-          role: action.payload.role,
-          content: action.payload.content,
-          messageID: action.payload.messageID,
-        },
-      ];
-      // Create a new currentThread object with the updatedMessages array
-      const updatedThread = {
-        ...state.currentThread,
-        messages: updatedMessages,
-        lastUpdated: timeStamp,
-      };
-      return {
-        ...state,
-        currentThread: updatedThread,
-      };
+      if (
+        state.currentThread.messages[state.currentThread.messages.length - 1]
+          .messageID === action.payload.messageID
+      ) {
+        // update the last message in the array with the payload content
+        const updatedMessages = [
+          ...state.currentThread.messages.slice(0, -1),
+          {
+            role: action.payload.role,
+            content: action.payload.content,
+            messageID: action.payload.messageID,
+          },
+        ];
+        // Create a new currentThread object with the updatedMessages array
+        const updatedThread = {
+          ...state.currentThread,
+          messages: updatedMessages,
+          lastUpdated: timeStamp,
+        };
+        return {
+          ...state,
+          currentThread: updatedThread,
+        };
+      } else {
+        const updatedMessages = [
+          ...state.currentThread.messages,
+          {
+            role: action.payload.role,
+            content: action.payload.content,
+            messageID: action.payload.messageID,
+          },
+        ];
+        // Create a new currentThread object with the updatedMessages array
+        const updatedThread = {
+          ...state.currentThread,
+          messages: updatedMessages,
+          lastUpdated: timeStamp,
+        };
+        return {
+          ...state,
+          currentThread: updatedThread,
+        };
+      }
+
+    // case ADD_MESSAGE_STREAM:
+    //   const streamTimeStamp = new Date().getTime().toString();
+    //   const payloadID = action.payload.messageID;
+    //   // find the message in the currentThread.messages array that matches the payloadID
+    //   const messageIndex2 = state.currentThread.messages.findIndex(
+    //     (message) => message.messageID === payloadID
+    //   );
+    //   // If messageIndex is -1, it means the messageID does not exist in the array
+    //   if (messageIndex2 === -1) {
+    //     console.error("MessageID not found");
+    //     return state;
+    //   }
+    //   // Create a new message object with the updated content
+    //   const updatedMessage2 = {
+    //     ...state.currentThread.messages[messageIndex2],
+    //     content: action.payload.content,
+    //   };
+    //   // Create a new messages array with the updated message
+    //   const updatedMessagesArray3 = [
+    //     ...state.currentThread.messages.slice(0, messageIndex2),
+    //     updatedMessage2,
+    //     ...state.currentThread.messages.slice(messageIndex2 + 1),
+    //   ];
+    //   // Create a new currentThread object with the updatedMessages array
+    //   const updatedThread2 = {
+    //     ...state.currentThread,
+    //     messages: updatedMessagesArray3,
+    //     lastUpdated: streamTimeStamp,
+    //   };
+    //   return {
+    //     ...state,
+    //     currentThread: updatedThread2,
+    //   };
 
     case RESET_CURRENT_THREAD:
       return {

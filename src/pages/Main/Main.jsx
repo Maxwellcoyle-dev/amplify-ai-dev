@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // Styles
 import styles from "./Main.module.css";
 
 // Custom Hooks
-import useOpenAIChat from "../../hooks/useOpenAIChat";
+// import useOpenAIChat from "../../hooks/useOpenAIChat";
+import useLLMStream from "../../hooks/useLLMStream";
 
 // Custom Components
 import UserInputBar from "../../components/UserInputBar/UserInputBar";
@@ -13,24 +14,22 @@ import ThreadAttachmentsModal from "../../components/ThreadAttachmentsModal/Thre
 
 // State Management
 import { AppStateContext } from "../../state/AppContext";
+import { StreamedResponseProvider } from "../../state/StreamedResponseContext";
 
 const Main = ({ showAttachmentModal, setShowAttachmentModal }) => {
   const { threadData } = useContext(AppStateContext);
 
-  const { chatError } = useOpenAIChat();
-
   return (
-    <>
+    <StreamedResponseProvider>
       <div className={styles.container}>
         <ThreadAttachmentsModal
           showAttachmentModal={showAttachmentModal}
           setShowAttachmentModal={setShowAttachmentModal}
         />
         <ChatContainer currentThread={threadData.currentThread} />
-        {chatError && <div>Error</div>}
         <UserInputBar />
       </div>
-    </>
+    </StreamedResponseProvider>
   );
 };
 
