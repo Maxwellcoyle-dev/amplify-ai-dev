@@ -1,6 +1,6 @@
 .container {
   height: fit-content;
-  padding: 2rem 3rem 4rem 3rem;
+  padding: 2rem 3rem 3rem 3rem;
   display: flex;
   gap: 0.5rem;
   width: 100%;
@@ -21,7 +21,7 @@
 .loading {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-self: flex-start;
   height: 100%;
   margin-left: 0.5rem;
 }

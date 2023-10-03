@@ -9,6 +9,7 @@ import {
   CREATE_NEW_THREAD,
   DELETE_THREAD,
   ADD_MESSAGE,
+  ADD_MESSAGE_STREAM,
   ADD_ASSISTANT_RESPONSE,
   DELETE_MESSAGE,
   SET_CURRENT_THREAD_URLS,
@@ -88,6 +89,13 @@ export const setThreadTitle = (thread) => {
 export const addMessage = (content) => {
   return {
     type: ADD_MESSAGE,
+    content,
+  };
+};
+
+export const addMessageStream = (content) => {
+  return {
+    type: ADD_MESSAGE_STREAM,
     content,
   };
 };
