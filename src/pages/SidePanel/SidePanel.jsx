@@ -15,7 +15,7 @@ import useGetThread from "../../hooks/useGetThread";
 
 // Ant UI
 import { PlusOutlined, RightOutlined } from "@ant-design/icons";
-import { Menu, Spin } from "antd";
+import { Menu, Space, Spin } from "antd";
 
 // Components
 import SidePanelHeader from "../../components/SidePanelHeader/SidePanelHeader";
@@ -32,8 +32,9 @@ const SidePanel = ({ collapsed }) => {
   const { getThreads, threadsLoading } = useGetThreads(); // Custom hook for getting all threads
   const { getThread } = useGetThread(); // Custom hook for getting a single thread
 
+  // Get all threads from the database on component mount
   useEffect(() => {
-    getThreads(); // Get all threads from the database
+    getThreads();
   }, []);
 
   const createNewThread = () => {
@@ -47,7 +48,7 @@ const SidePanel = ({ collapsed }) => {
 
   return (
     <>
-      <div className="demo-logo-vertical" />
+      <Space className="demo-logo-vertical" />
       <SidePanelHeader collapsed={collapsed} />
 
       <Menu

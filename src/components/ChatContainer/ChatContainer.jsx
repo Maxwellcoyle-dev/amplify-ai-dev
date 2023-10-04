@@ -9,10 +9,12 @@ import { AppStateContext } from "../../state/AppContext";
 // Styles
 import styles from "./ChatContainer.module.css";
 
-const ChatContainer = ({ currentThread }) => {
+const ChatContainer = () => {
   const [updateThread, setUpdateThread] = useState(false);
 
+  // Get ThreadData State then destructure currentThread
   const { threadData } = useContext(AppStateContext);
+  const currentThread = threadData.currentThread;
 
   const lastMessageRef = useRef(null);
 

@@ -22,24 +22,25 @@ import {
 } from "@ant-design/icons";
 
 // Context & Actions
-import { AppStateContext } from "../../state/AppContext";
+import { AppStateContext, AppDispatchContext } from "../../state/AppContext";
 
 // Custom Hooks
 import useDeleteFile from "../../hooks/useDeleteFile";
 import useFileUpload from "../../hooks/useFileUpload";
 import useUpdateThreadUrls from "../../hooks/useUpdateThreadUrls";
 
-const ThreadAttachmentsModal = ({
-  showAttachmentModal,
-  setShowAttachmentModal,
-}) => {
+const ThreadAttachmentsModal = () => {
   const [fileList, setFileList] = useState([]);
   const [urlList, setUrlList] = useState([]);
   const [urlInput, setUrlInput] = useState("");
   const [showUrlInput, setShowUrlInput] = useState(false);
 
+  const dispatch = useContext(AppDispatchContext);
+
   // Global State
-  const { threadData } = useContext(AppStateContext);
+  const { threadData, showAttachmentModal } = useContext(AppStateContext);
+
+  // Destructure threadID, currentThreadFiles, currentThreadUrls from threadData
   const threadID = threadData?.currentThread?.threadID;
   const currentThreadFiles = threadData?.currentThread?.files;
   const currentThreadUrls = threadData?.currentThread?.urls;
@@ -52,8 +53,8 @@ const ThreadAttachmentsModal = ({
     useUpdateThreadUrls();
 
   // Component Methods
-  const handleOnCancel = () => {
-    setShowAttachmentModal(false);
+  const handleClose = () => {
+    dispatch({ type: "HIDE_ATTACHMENT_MODAL" });
     setShowUrlInput(false);
     setUrlInput("");
   };
@@ -94,11 +95,11 @@ const ThreadAttachmentsModal = ({
   return (
     <Modal
       open={showAttachmentModal}
-      onCancel={handleOnCancel}
+      onCancel={handleClose}
       width="50%"
       keyboard
       centered
-      onOk={() => setShowAttachmentModal(false)}
+      onOk={handleClose}
     >
       <Row gutter={24}>
         <Typography.Title level={3} type="warning">

@@ -23,7 +23,6 @@ const { Header, Sider, Content } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [showAttachmentModal, setShowAttachmentModal] = useState(false);
 
   const handleCollapse = (value) => {
     setCollapsed(value);
@@ -42,13 +41,10 @@ const App = () => {
         </Sider>
         <Layout>
           <Header className={topBarStyles.topBar}>
-            <TopBar setShowAttachmentModal={setShowAttachmentModal} />
+            <TopBar />
           </Header>
           <Content>
-            <Main
-              showAttachmentModal={showAttachmentModal}
-              setShowAttachmentModal={setShowAttachmentModal}
-            />
+            <Main />
           </Content>
         </Layout>
       </Layout>

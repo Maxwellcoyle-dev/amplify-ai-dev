@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+
+// State Management
+import { AppDispatchContext } from "../../state/AppContext";
+import { SHOW_ATTACHMENT_MODAL } from "../../state/actions/actionTypes";
 
 // Ant Design
 import { Button } from "antd";
 
-const TopBarFilesBtn = ({ setShowAttachmentModal }) => {
+const TopBarFilesBtn = () => {
+  const dispatch = useContext(AppDispatchContext);
+
   const handleClick = (event) => {
     event.preventDefault();
-    setShowAttachmentModal(true);
+    dispatch({ type: SHOW_ATTACHMENT_MODAL });
   };
 
   return (

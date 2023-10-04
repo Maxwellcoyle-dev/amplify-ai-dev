@@ -1,11 +1,15 @@
+// User Actions
 export const SET_USER = "SET_USER";
 
+// THREAD ACTIONS
+//  - THREAD - currentThread Actions
 export const ADD_MESSAGE = "ADD_MESSAGE";
 export const ADD_MESSAGE_STREAM = "ADD_MESSAGE_STREAM";
 export const ADD_ASSISTANT_RESPONSE = "SET_ASSISTANT_RESPONSE";
 export const DELETE_MESSAGE = "DELETE_MESSAGE";
 export const EDIT_MESSAGE = "EDIT_MESSAGE";
 
+//  - THREAD - Threads Actions
 export const SET_THREADS = "SET_THREADS";
 export const ADD_THREAD = "ADD_THREAD";
 export const UPDATE_THREAD_LASTUPDATED = "UPDATE_THREAD_LASTUPDATED";
@@ -17,9 +21,11 @@ export const DELETE_THREAD = "DELETE_THREAD";
 export const SET_THREAD_TITLE = "SET_THREAD_TITLE";
 export const SET_CURRENT_THREAD_URLS = "SET_CURRENT_THREAD_URLS";
 
+// Mode Actions
 export const SET_MODE = "SET_MODE";
 
-export const UPLOAD_FILE = "UPLOAD_FILE";
-export const DELETE_FILE = "DELETE_FILE";
-export const ATTACH_FILE_TO_THREAD = "ATTACH_FILE_TO_THREAD";
-export const REMOVE_FILE_FROM_THREAD = "DETACH_FILE_FROM_THREAD";
+// Side Panel Actions
+
+// Attachments Modal Actions
+export const SHOW_ATTACHMENT_MODAL = "SHOW_ATTACHMENT_MODAL";
+export const HIDE_ATTACHMENT_MODAL = "HIDE_ATTACHMENT_MODAL";
