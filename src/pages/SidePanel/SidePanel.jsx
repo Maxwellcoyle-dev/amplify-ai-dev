@@ -17,6 +17,8 @@ import useGetThread from "../../hooks/useGetThread";
 import { PlusOutlined, RightOutlined } from "@ant-design/icons";
 import { Menu, Space, Spin } from "antd";
 
+import styles from "./SidePanel.module.css";
+
 // Components
 import SidePanelHeader from "../../components/SidePanelHeader/SidePanelHeader";
 
@@ -47,14 +49,14 @@ const SidePanel = ({ collapsed }) => {
   };
 
   return (
-    <>
-      <Space className="demo-logo-vertical" />
+    <Space direction="vertical" className={styles.container}>
       <SidePanelHeader collapsed={collapsed} />
 
       <Menu
         defaultSelectedKeys={[newThreadUUID]}
         mode="vertical"
         selectedKeys={currentThreadID ? currentThreadID : newThreadUUID}
+        className={styles.menu}
       >
         <Menu.Item
           key={newThreadUUID}
@@ -75,10 +77,12 @@ const SidePanel = ({ collapsed }) => {
             </Menu.Item>
           ))
         ) : (
-          <Spin size="large" />
+          <Space className={styles.spinDiv}>
+            <Spin size="large" />
+          </Space>
         )}
       </Menu>
-    </>
+    </Space>
   );
 };
 

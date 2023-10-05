@@ -1,7 +1,17 @@
 .topBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  padding: 0 2rem;
+  align-items: center;
+  height: 64px;
   background-color: white;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(0);
+  z-index: 99;
+}
+
+.topBar-hidden {
+  transform: translateY(-64px);
 }

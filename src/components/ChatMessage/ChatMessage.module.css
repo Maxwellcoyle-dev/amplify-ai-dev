@@ -1,29 +1,115 @@
 .container {
   display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
-}
-
-.textContainerReadOnly {
-  display: flex;
-  align-items: flex-start;
-  padding: 1.5rem;
-  background-color: rgb(237, 234, 234);
-  border-radius: 1rem;
-}
-
-.textContainerEditable {
-  display: flex;
-  align-items: flex-start;
-  padding: 1.5rem;
-  background-color: rgb(255, 255, 255);
-  border-radius: 1rem;
-}
-
-.headerContainer {
-  display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.personaSpace {
+  justify-self: flex-start;
+}
+
+.optionsSpace {
+  justify-self: flex-end;
+}
+
+.chatTextContainer {
+  background-color: #ca3e9713;
   width: 100%;
-  padding: 0 0.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.chatTextContainer h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.chatTextContainer h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+.chatTextContainer h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+.chatTextContainer h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+.chatTextContainer h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+
+.chatTextContainer ul,
+.chatTextContainer ol {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 40px;
+}
+
+/* add styles for remark-gfm */
+.chatTextContainer table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 100%;
+  overflow: auto;
+  display: block;
+}
+
+.chatTextContainer table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+.chatTextContainer table th,
+.chatTextContainer table td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+.chatTextContainer table th {
+  font-weight: bold;
+}
+
+.chatTextContainer table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.chatTextContainer table tr th:first-child,
+.chatTextContainer table tr td:first-child {
+  padding-left: 16px;
+}
+
+.chatTextContainer table tr th:last-child,
+.chatTextContainer table tr td:last-child {
+  padding-right: 16px;
+}
+
+.chatTextContainer table tr th:only-child,
+.chatTextContainer table tr td:only-child {
+  padding: 6px 16px;
+}
+
+.chatTextContainer table tr th {
+  text-align: left;
+}
+
+.chatTextContainer table tr td {
+  text-align: left;
+}
+
+.chatTextContainer table tr th p,
+.chatTextContainer table tr td p {
+  margin-top: 0;
+}
+
+.chatTextContainer table tr th {
+  font-weight: 600;
+}
+
+.chatTextContainer table tr td {
+  font-weight: 400;
 }

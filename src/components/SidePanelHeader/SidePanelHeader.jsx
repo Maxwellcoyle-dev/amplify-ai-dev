@@ -36,7 +36,9 @@ const SidePanelHeader = ({ collapsed }) => {
   return (
     <Space className={styles.container}>
       {!collapsed && (
-        <Typography.Text>{user?.userID?.split("@")[0]}</Typography.Text>
+        <Typography.Text className={styles.text}>
+          {user?.userID?.split("@")[0]}
+        </Typography.Text>
       )}
       <Button onClick={handleSignOutClick}>
         <LogoutOutlined />

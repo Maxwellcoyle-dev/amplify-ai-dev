@@ -5,15 +5,21 @@ import TopBarTitle from "../TopBarTitle/TopBarTitle";
 import TopBarMenu from "../TopBarMenu/TopBarMenu";
 
 // Ant Design
-import { Typography } from "antd";
+import { Typography, Space } from "antd";
 
-const TopBar = () => {
+import styles from "./TopBar.module.css";
+
+const TopBar = ({ showTopBar }) => {
   return (
-    <>
+    <Space
+      className={`${styles.topBar} ${
+        showTopBar ? "" : styles["topBar-hidden"]
+      }`}
+    >
       <TopBarTitle />
       <Typography.Title level={5}>GPT-4</Typography.Title>
       <TopBarMenu />
-    </>
+    </Space>
   );
 };
 

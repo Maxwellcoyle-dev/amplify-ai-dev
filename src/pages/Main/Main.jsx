@@ -7,12 +7,14 @@ import styles from "./Main.module.css";
 import UserInputBar from "../../components/UserInputBar/UserInputBar";
 import ChatContainer from "../../components/ChatContainer/ChatContainer";
 import ThreadAttachmentsModal from "../../components/ThreadAttachmentsModal/ThreadAttachmentsModal";
+import TopBar from "../../components/TopBar/TopBar";
 
-const Main = () => {
+const Main = ({ setShowTopBar, showTopBar }) => {
   return (
     <div className={styles.container}>
+      <TopBar showTopBar={showTopBar} />
       <ThreadAttachmentsModal />
-      <ChatContainer />
+      <ChatContainer setShowTopBar={setShowTopBar} showTopBar={showTopBar} />
       <UserInputBar />
     </div>
   );
