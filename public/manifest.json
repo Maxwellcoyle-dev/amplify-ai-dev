@@ -1,6 +1,6 @@
 {
   "short_name": "Trainicity AI",
-  "name": "Traincity's AI Tool",
+  "name": "",
   "icons": [
     {
       "src": "./trainicity-ai.png",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#ca3e9713",
   "background_color": "#ffffff"
 }
