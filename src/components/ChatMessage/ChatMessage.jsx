@@ -68,7 +68,7 @@ const ChatMessage = forwardRef(({ persona, chatMessage, messageID }, ref) => {
   };
 
   return (
-    <Space ref={ref} direction="vertical">
+    <Space ref={ref} direction="vertical" className={styles.chatMessageWrapper}>
       <Space className={styles.container}>
         <Space className={styles.personaSpace}>
           {persona === "user" ? <UserOutlined /> : <RobotOutlined />}
