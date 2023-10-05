@@ -7,7 +7,6 @@ import { SendOutlined } from "@ant-design/icons";
 import TextEntry from "../TextEntry/TextEntry";
 
 // Custom Hooks
-// import useOpenAIChat from "../../hooks/useOpenAIChat";
 import useLLMStream from "../../hooks/useLLMStream";
 
 // Ant UI

@@ -4,13 +4,22 @@ import React from "react";
 import TopBarTitle from "../TopBarTitle/TopBarTitle";
 import TopBarMenu from "../TopBarMenu/TopBarMenu";
 
-const TopBar = ({ setShowAttachmentModal }) => {
+// Ant Design
+import { Typography, Space } from "antd";
+
+import styles from "./TopBar.module.css";
+
+const TopBar = ({ showTopBar }) => {
   return (
-    <>
+    <Space
+      className={`${styles.topBar} ${
+        showTopBar ? "" : styles["topBar-hidden"]
+      }`}
+    >
       <TopBarTitle />
-      <p>GPT-4</p>
-      <TopBarMenu setShowAttachmentModal={setShowAttachmentModal} />
-    </>
+      <Typography.Title level={5}>GPT-4</Typography.Title>
+      <TopBarMenu />
+    </Space>
   );
 };
 

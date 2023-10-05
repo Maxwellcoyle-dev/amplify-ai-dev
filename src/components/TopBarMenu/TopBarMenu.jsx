@@ -7,10 +7,10 @@ import TopBarFilesBtn from "../TopBarFilesBtn/TopBarFilesBtn";
 // Ant Design
 import { Space } from "antd";
 
-const TopBarMenu = ({ setShowAttachmentModal }) => {
+const TopBarMenu = () => {
   return (
     <Space>
-      <TopBarFilesBtn setShowAttachmentModal={setShowAttachmentModal} />
+      <TopBarFilesBtn />
       <TopBarDelete />
     </Space>
   );

@@ -1,35 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 
 // Styles
 import styles from "./Main.module.css";
-
-// Custom Hooks
-// import useOpenAIChat from "../../hooks/useOpenAIChat";
-import useLLMStream from "../../hooks/useLLMStream";
 
 // Custom Components
 import UserInputBar from "../../components/UserInputBar/UserInputBar";
 import ChatContainer from "../../components/ChatContainer/ChatContainer";
 import ThreadAttachmentsModal from "../../components/ThreadAttachmentsModal/ThreadAttachmentsModal";
+import TopBar from "../../components/TopBar/TopBar";
 
-// State Management
-import { AppStateContext } from "../../state/AppContext";
-import { StreamedResponseProvider } from "../../state/StreamedResponseContext";
-
-const Main = ({ showAttachmentModal, setShowAttachmentModal }) => {
-  const { threadData } = useContext(AppStateContext);
-
+const Main = ({ setShowTopBar, showTopBar }) => {
   return (
-    <StreamedResponseProvider>
-      <div className={styles.container}>
-        <ThreadAttachmentsModal
-          showAttachmentModal={showAttachmentModal}
-          setShowAttachmentModal={setShowAttachmentModal}
-        />
-        <ChatContainer currentThread={threadData.currentThread} />
-        <UserInputBar />
-      </div>
-    </StreamedResponseProvider>
+    <div className={styles.container}>
+      <TopBar showTopBar={showTopBar} />
+      <ThreadAttachmentsModal />
+      <ChatContainer setShowTopBar={setShowTopBar} showTopBar={showTopBar} />
+      <UserInputBar />
+    </div>
   );
 };
 

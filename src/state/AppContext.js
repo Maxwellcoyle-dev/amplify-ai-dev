@@ -1,4 +1,4 @@
-// create a context for the app state and a separate one for the dispatcher function
+// create a context for the app state & dispatcher function
 import React from "react";
 
 const AppStateContext = React.createContext();

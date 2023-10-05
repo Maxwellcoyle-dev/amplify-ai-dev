@@ -1,10 +1,10 @@
-import React, { forwardRef, useState, useContext, useEffect } from "react";
+import React, { forwardRef, useState, useContext } from "react";
 
 // Styles
 import styles from "./ChatMessage.module.css";
 
-// Components
-import ChatText from "../ChatText/ChatText";
+import Markdown from "react-markdown";
+import gfm from "remark-gfm";
 
 // Hooks
 import usePushCurrentThread from "../../hooks/usePushCurrentThread";
@@ -68,13 +68,13 @@ const ChatMessage = forwardRef(({ persona, chatMessage, messageID }, ref) => {
   };
 
   return (
-    <div className={styles.container} ref={ref}>
-      <div className={styles.headerContainer}>
-        <Space>
+    <Space ref={ref} direction="vertical">
+      <Space className={styles.container}>
+        <Space className={styles.personaSpace}>
           {persona === "user" ? <UserOutlined /> : <RobotOutlined />}
           <Text type="secondary">{persona}</Text>
         </Space>
-        <Space>
+        <Space className={styles.optionsSpace}>
           <Button
             type="text"
             onClick={isEditable ? handleEditMessage : handleEditToggle}
@@ -88,22 +88,12 @@ const ChatMessage = forwardRef(({ persona, chatMessage, messageID }, ref) => {
             <CloseOutlined />
           </Button>
         </Space>
-      </div>
+      </Space>
 
-      <div
-        className={
-          isEditable
-            ? styles.textContainerEditable
-            : styles.textContainerReadOnly
-        }
-      >
-        <ChatText
-          isEditable={isEditable}
-          text={chatMessage}
-          setEditorContent={setEditorContent}
-        ></ChatText>
-      </div>
-    </div>
+      <Space className={styles.chatTextContainer}>
+        <Markdown children={chatMessage} remarkPlugins={[gfm]} />
+      </Space>
+    </Space>
   );
 });
 

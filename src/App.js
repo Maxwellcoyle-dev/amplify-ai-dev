@@ -23,7 +23,7 @@ const { Header, Sider, Content } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [showAttachmentModal, setShowAttachmentModal] = useState(false);
+  const [showTopBar, setShowTopBar] = useState(true);
 
   const handleCollapse = (value) => {
     setCollapsed(value);
@@ -41,14 +41,8 @@ const App = () => {
           <SidePanel setCollapsed={setCollapsed} collapsed={collapsed} />
         </Sider>
         <Layout>
-          <Header className={topBarStyles.topBar}>
-            <TopBar setShowAttachmentModal={setShowAttachmentModal} />
-          </Header>
-          <Content>
-            <Main
-              showAttachmentModal={showAttachmentModal}
-              setShowAttachmentModal={setShowAttachmentModal}
-            />
+          <Content className={styles.content}>
+            <Main setShowTopBar={setShowTopBar} showTopBar={showTopBar} />
           </Content>
         </Layout>
       </Layout>
