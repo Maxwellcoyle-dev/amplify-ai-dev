@@ -108,6 +108,16 @@
     }
   },
   "function": {
+    "amplifyaidevAWSLayer": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer"
+    },
+    "amplifyaidevlangchainLayer": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer"
+    },
     "handleChatGPT4": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -173,6 +183,13 @@
       "dependsOn": [
         {
           "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyaidevAWSLayer"
+        },
+        {
+          "attributes": [
             "Name",
             "Arn",
             "StreamArn"
@@ -189,12 +206,75 @@
       "dependsOn": [
         {
           "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyaidevAWSLayer"
+        },
+        {
+          "attributes": [
             "Name",
             "Arn",
             "StreamArn"
           ],
           "category": "storage",
           "resourceName": "amplifyAiProjectTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "handleLLMDocQAConversation": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiStorage"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyaidevlangchainLayer"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyaidevAWSLayer"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "handleLLMDocSum": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiStorage"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyaidevlangchainLayer"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyaidevAWSLayer"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -257,6 +337,38 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_amplifyaidevAWSLayer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyaidevAWSLayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyaidevAWSLayer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyaidevAWSLayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyaidevlangchainLayer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyaidevlangchainLayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyaidevlangchainLayer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyaidevlangchainLayer"
+        }
+      ]
+    },
     "AMPLIFY_function_handleChatGPT4_deploymentBucketName": {
       "usedBy": [
         {
@@ -358,6 +470,38 @@
         {
           "category": "function",
           "resourceName": "handleGetThreadsList"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleLLMDocQAConversation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleLLMDocQAConversation"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleLLMDocQAConversation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleLLMDocQAConversation"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleLLMDocSum_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleLLMDocSum"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleLLMDocSum_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleLLMDocSum"
         }
       ]
     },

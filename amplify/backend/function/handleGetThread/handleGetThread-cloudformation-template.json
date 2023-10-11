@@ -27,6 +27,10 @@
     "storageamplifyAiProjectTableStreamArn": {
       "Type": "String",
       "Default": "storageamplifyAiProjectTableStreamArn"
+    },
+    "functionamplifyaidevAWSLayerArn": {
+      "Type": "String",
+      "Default": "functionamplifyaidevAWSLayerArn"
     }
   },
   "Conditions": {
@@ -100,7 +104,11 @@
           ]
         },
         "Runtime": "nodejs18.x",
-        "Layers": [],
+        "Layers": [
+          {
+            "Ref": "functionamplifyaidevAWSLayerArn"
+          }
+        ],
         "Timeout": 25
       }
     },

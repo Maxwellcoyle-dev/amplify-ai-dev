@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.4.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.6.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -16,17 +16,13 @@
     "s3Key": {
       "Type": "String"
     },
-    "storageamplifyAiProjectTableName": {
+    "storageamplifyAiStorageBucketName": {
       "Type": "String",
-      "Default": "storageamplifyAiProjectTableName"
+      "Default": "storageamplifyAiStorageBucketName"
     },
-    "storageamplifyAiProjectTableArn": {
+    "functionamplifyaidevlangchainLayerArn": {
       "Type": "String",
-      "Default": "storageamplifyAiProjectTableArn"
-    },
-    "storageamplifyAiProjectTableStreamArn": {
-      "Type": "String",
-      "Default": "storageamplifyAiProjectTableStreamArn"
+      "Default": "functionamplifyaidevlangchainLayerArn"
     },
     "functionamplifyaidevAWSLayerArn": {
       "Type": "String",
@@ -63,12 +59,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "handleGetThreadsList",
+            "handleLLMDocQAConversation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "handleGetThreadsList",
+                  "handleLLMDocQAConversation",
                   "-",
                   {
                     "Ref": "env"
@@ -86,14 +82,8 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_AMPLIFYAIPROJECTTABLE_NAME": {
-              "Ref": "storageamplifyAiProjectTableName"
-            },
-            "STORAGE_AMPLIFYAIPROJECTTABLE_ARN": {
-              "Ref": "storageamplifyAiProjectTableArn"
-            },
-            "STORAGE_AMPLIFYAIPROJECTTABLE_STREAMARN": {
-              "Ref": "storageamplifyAiProjectTableStreamArn"
+            "STORAGE_AMPLIFYAISTORAGE_BUCKETNAME": {
+              "Ref": "storageamplifyAiStorageBucketName"
             }
           }
         },
@@ -105,6 +95,9 @@
         },
         "Runtime": "nodejs18.x",
         "Layers": [
+          {
+            "Ref": "functionamplifyaidevlangchainLayerArn"
+          },
           {
             "Ref": "functionamplifyaidevAWSLayerArn"
           }
@@ -118,12 +111,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyaidevLambdaRole0e1a1a8f",
+            "amplifyaidevLambdaRole511f6b91",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyaidevLambdaRole0e1a1a8f",
+                  "amplifyaidevLambdaRole511f6b91",
                   "-",
                   {
                     "Ref": "env"
@@ -211,34 +204,36 @@
           "Statement": [
             {
               "Effect": "Allow",
+              "Action": "s3:ListBucket",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storageamplifyAiStorageBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
               "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PartiQLInsert",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:PartiQLSelect",
-                "dynamodb:Update*",
-                "dynamodb:RestoreTable*",
-                "dynamodb:PartiQLUpdate"
+                "s3:GetObject"
               ],
               "Resource": [
                 {
-                  "Ref": "storageamplifyAiProjectTableArn"
-                },
-                {
                   "Fn::Join": [
-                    "/",
+                    "",
                     [
+                      "arn:aws:s3:::",
                       {
-                        "Ref": "storageamplifyAiProjectTableArn"
+                        "Ref": "storageamplifyAiStorageBucketName"
                       },
-                      "index/*"
+                      "/*"
                     ]
                   ]
                 }

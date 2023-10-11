@@ -6,7 +6,8 @@
 	STORAGE_AMPLIFYAIPROJECTTABLE_STREAMARN
 Amplify Params - DO NOT EDIT */
 
-const { DynamoDBClient, QueryCommand } = require("@aws-sdk/client-dynamodb");
+import { DynamoDBClient, QueryCommand } from "@aws-sdk/client-dynamodb";
+
 const docClient = new DynamoDBClient({ region: "us-east-2" });
 
 /**
@@ -31,7 +32,7 @@ async function queryTable(UserID) {
   }
 }
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   try {
     // Handle possible preflight requests
     if (event.httpMethod === "OPTIONS") {

@@ -18,6 +18,12 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "amplifyaidevAWSLayer": {
+      "Arn": "string"
+    },
+    "amplifyaidevlangchainLayer": {
+      "Arn": "string"
+    },
     "handleChatGPT4": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -54,6 +60,20 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "handleGetThreadsList": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "handleLLMDocQAConversation": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "handleLLMDocSum": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

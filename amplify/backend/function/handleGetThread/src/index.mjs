@@ -1,4 +1,5 @@
-const { DynamoDBClient, GetItemCommand } = require("@aws-sdk/client-dynamodb");
+import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
+
 const REGION = "us-east-2";
 const ddbClient = new DynamoDBClient({ region: REGION });
 
@@ -25,7 +26,7 @@ const getThread = async (requestBody) => {
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-exports.handler = async (event) => {
+export const handler = async (event) => {
   try {
     // Handle possible preflight requests
     if (event.httpMethod === "OPTIONS") {

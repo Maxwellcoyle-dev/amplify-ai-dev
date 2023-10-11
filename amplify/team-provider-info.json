@@ -15,7 +15,7 @@
       "function": {
         "handleGetThreadsList": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleGetThreadsList-646743567a6e7a376750-build.zip"
+          "s3Key": "amplify-builds/handleGetThreadsList-6430774933724d7a6561-build.zip"
         },
         "handleDeleteThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
@@ -39,7 +39,7 @@
         },
         "handleGetThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleGetThread-63384977713078475277-build.zip"
+          "s3Key": "amplify-builds/handleGetThread-6d674b54476e48765676-build.zip"
         },
         "handleCurrentThread": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
@@ -49,6 +49,22 @@
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
           "s3Key": "amplify-builds/handleChatGPT4-393973566a5166346a4f-build.zip",
           "secretsPathAmplifyAppId": "d7unl533h0att"
+        },
+        "amplifyaidevlangchainLayer": {
+          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
+          "s3Key": "amplify-builds/amplifyaidevlangchainLayer-LambdaLayerVersion76e0440a-build.zip"
+        },
+        "amplifyaidevAWSLayer": {
+          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
+          "s3Key": "amplify-builds/amplifyaidevAWSLayer-LambdaLayerVersion6766992e-build.zip"
+        },
+        "handleLLMDocSum": {
+          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
+          "s3Key": "amplify-builds/handleLLMDocSum-57746a45596d37347a73-build.zip"
+        },
+        "handleLLMDocQAConversation": {
+          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
+          "s3Key": "amplify-builds/handleLLMDocQAConversation-3570736a39454355426c-build.zip"
         }
       },
       "storage": {
