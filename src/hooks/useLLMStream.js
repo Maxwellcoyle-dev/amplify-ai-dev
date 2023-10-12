@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // Context & Actions
 import { AppStateContext, AppDispatchContext } from "../state/AppContext";
-import { ADD_MESSAGE, CREATE_NEW_THREAD } from "../state/actions/actionTypes";
+import { ADD_MESSAGE } from "../state/actions/actionTypes";
 
 // Hooks
 import usePushCurrentThread from "./usePushCurrentThread";
@@ -28,7 +28,7 @@ const useLLMStream = () => {
   // Set up a one time unique id for the assistant message
   if (assistantMessageID === null) setAssistantMessageID(uuidv4());
 
-  //   Listen to the streamedResponse State and call ADD_MESSAGE when it changes
+  // Listen to the streamedResponse State and call ADD_MESSAGE when it changes
   useEffect(() => {
     if (streamedResponse === "") return;
     dispatch({
@@ -51,19 +51,10 @@ const useLLMStream = () => {
     // Create a unique message ID
     const messageID = uuidv4();
 
-    // Check if there is a current thread and if not, create one
-    if (!state.threadData.currentThread.threadID) {
-      dispatch({
-        type: CREATE_NEW_THREAD,
-        payload: { role: "user", content: userMessage, messageID: messageID },
-      });
-      //   Else add the message to the current thread
-    } else {
-      dispatch({
-        type: ADD_MESSAGE,
-        payload: { role: "user", content: userMessage, messageID: messageID },
-      });
-    }
+    dispatch({
+      type: ADD_MESSAGE,
+      payload: { role: "user", content: userMessage, messageID: messageID },
+    });
 
     // Set up controller to abort fetch request if user sends another message or cancels
     const newContoller = new AbortController();
@@ -71,17 +62,24 @@ const useLLMStream = () => {
     const signal = newContoller.signal;
 
     // get only message.role and message.content from the current thread messages array not message.messageID
-    const mappedMessageThread = state.threadData.currentThread.messages.map(
+    const mappedMessageThread = state.threadData.currentThread.messages?.map(
       (message) => {
         return { role: message.role, content: message.content };
       }
     );
 
     // add { role: "user", content: userMessage } to the mappedMessageThread array
-    const currentMessageThread = [
-      ...mappedMessageThread,
-      { role: "user", content: userMessage },
-    ];
+
+    let currentMessageThread = [];
+
+    if (!mappedMessageThread) {
+      currentMessageThread = [{ role: "user", content: userMessage }];
+    } else {
+      currentMessageThread = [
+        ...mappedMessageThread,
+        { role: "user", content: userMessage },
+      ];
+    }
 
     try {
       const response = await fetch(url, {

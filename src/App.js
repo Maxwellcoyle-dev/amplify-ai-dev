@@ -22,6 +22,7 @@ import "@aws-amplify/ui-react/styles.css";
 const { Header, Sider, Content } = Layout;
 
 const App = () => {
+  const [showNewThreadModal, setShowNewThreadModal] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [showTopBar, setShowTopBar] = useState(true);
 
@@ -38,11 +39,20 @@ const App = () => {
           onCollapse={handleCollapse}
           theme="light"
         >
-          <SidePanel setCollapsed={setCollapsed} collapsed={collapsed} />
+          <SidePanel
+            setCollapsed={setCollapsed}
+            collapsed={collapsed}
+            setShowNewThreadModal={setShowNewThreadModal}
+          />
         </Sider>
         <Layout>
           <Content className={styles.content}>
-            <Main setShowTopBar={setShowTopBar} showTopBar={showTopBar} />
+            <Main
+              setShowTopBar={setShowTopBar}
+              showTopBar={showTopBar}
+              setShowNewThreadModal={setShowNewThreadModal}
+              showNewThreadModal={showNewThreadModal}
+            />
           </Content>
         </Layout>
       </Layout>

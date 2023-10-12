@@ -11,7 +11,8 @@ import useGetThread from "../../hooks/useGetThread";
 
 // Styles
 import styles from "./ChatContainer.module.css";
-import { Space, Spin } from "antd";
+import { Button, Space, Spin, Flex, Typography } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
 const ChatContainer = ({ setShowTopBar, showTopBar }) => {
   const [updateThread, setUpdateThread] = useState(false);
@@ -20,8 +21,9 @@ const ChatContainer = ({ setShowTopBar, showTopBar }) => {
   const { threadLoading } = useGetThread();
 
   // Get ThreadData State then destructure currentThread
-  const { threadData } = useContext(AppStateContext);
-  const currentThread = threadData.currentThread;
+  const state = useContext(AppStateContext);
+  const currentThread = state?.threadData?.currentThread;
+  const mode = currentThread?.threadMode;
 
   // Handle auto scrolling when new message is added
   // Add ref to last message
@@ -29,16 +31,18 @@ const ChatContainer = ({ setShowTopBar, showTopBar }) => {
 
   // useEffect to scroll to last message
   useEffect(() => {
+    if (!containerRef.current) return;
     lastMessageRef?.current?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
-  }, [currentThread, threadData]);
+  }, [currentThread]);
 
   const containerRef = useRef(null);
   let lastScrollTop = 0;
 
   useEffect(() => {
+    if (!containerRef.current) return;
     const handleScroll = () => {
       let st = containerRef.current.scrollTop;
       const threshold = 5; // or whatever value works for you
@@ -61,11 +65,13 @@ const ChatContainer = ({ setShowTopBar, showTopBar }) => {
     };
   }, [setShowTopBar]);
 
-  useEffect(() => {
-    console.log(threadLoading);
-  }, [threadLoading]);
-
-  return (
+  return mode === "" ? (
+    <Flex style={{ height: "100vh" }} align="center" gap="middle">
+      <Button icon={<PlusOutlined />}>New Thread</Button>
+      <Typography.Text strong>Or</Typography.Text>
+      <Typography.Text>Choose a previous Thread to work with</Typography.Text>
+    </Flex>
+  ) : (
     <div
       className={`${styles.container} ${
         showTopBar ? "" : styles["topBar-hidden"]

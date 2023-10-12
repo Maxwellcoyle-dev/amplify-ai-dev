@@ -33,17 +33,10 @@ const useOpenAIChat = () => {
 
     const messageID = uuidv4();
 
-    if (!state.threadData.currentThread.threadID) {
-      dispatch({
-        type: CREATE_NEW_THREAD,
-        payload: { role: "user", content: userMessage, messageID: messageID },
-      });
-    } else {
-      dispatch({
-        type: ADD_MESSAGE,
-        payload: { role: "user", content: userMessage, messageID: messageID },
-      });
-    }
+    dispatch({
+      type: ADD_MESSAGE,
+      payload: { role: "user", content: userMessage, messageID: messageID },
+    });
 
     const updatedMessages = [
       ...state.threadData.currentThread.messages,

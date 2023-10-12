@@ -15,7 +15,7 @@ const sanitizeFileName = (filename) => {
 // Save the file to the specified location
 // Expects a buffer and a filename
 // Use in conjunction with getFile
-const saveFile = (buffer, filename) => {
+export const saveFile = (buffer, filename) => {
   const folderPath = "/tmp"; // point to the /tmp directory
   const newFilename = extractFileName(filename);
   const sanitizedFilename = sanitizeFileName(newFilename);
@@ -39,5 +39,3 @@ const saveFile = (buffer, filename) => {
     console.error("Error saving the file:", err);
   }
 };
-
-export { saveFile };

@@ -24,9 +24,10 @@ import SidePanelHeader from "../../components/SidePanelHeader/SidePanelHeader";
 
 const newThreadUUID = uuidv4();
 
-const SidePanel = ({ collapsed }) => {
+const SidePanel = ({ collapsed, setShowNewThreadModal }) => {
   const dispatch = useContext(AppDispatchContext);
-  const { threadData } = useContext(AppStateContext);
+  const state = useContext(AppStateContext);
+  const threadData = state?.threadData;
 
   // current threadID
   const currentThreadID = threadData?.currentThread?.threadID;
@@ -41,6 +42,8 @@ const SidePanel = ({ collapsed }) => {
 
   const createNewThread = () => {
     dispatch({ type: RESET_CURRENT_THREAD });
+    dispatch({ type: "SET_MODE", payload: "" });
+    setShowNewThreadModal(true);
   };
 
   const openThread = (threadID) => {

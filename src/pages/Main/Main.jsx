@@ -8,32 +8,24 @@ import UserInputBar from "../../components/UserInputBar/UserInputBar";
 import ChatContainer from "../../components/ChatContainer/ChatContainer";
 import ThreadAttachmentsModal from "../../components/ThreadAttachmentsModal/ThreadAttachmentsModal";
 import TopBar from "../../components/TopBar/TopBar";
+import NewThreadModal from "../../components/NewThreadModal/NewThreadModal";
 
-// Context & Actions
-import { AppStateContext } from "../../state/AppContext";
-
-// Custom Hooks
-import useLLMDocSum from "../../hooks/useLLMDocSum";
-import useLLMDocQA from "../../hooks/useLLMDocQA";
-import { Button } from "antd";
-
-const Main = ({ setShowTopBar, showTopBar }) => {
-  const state = useContext(AppStateContext);
-  const { fetchDocSum } = useLLMDocSum();
-  const { fetchDocQA } = useLLMDocQA();
-
+const Main = ({
+  setShowTopBar,
+  showTopBar,
+  setShowNewThreadModal,
+  showNewThreadModal,
+}) => {
   return (
     <div className={styles.container}>
       <TopBar showTopBar={showTopBar} />
       <ThreadAttachmentsModal />
       <ChatContainer setShowTopBar={setShowTopBar} showTopBar={showTopBar} />
-      <Button
-        onClick={() => {
-          fetchDocQA();
-        }}
-      >
-        test function
-      </Button>
+      <NewThreadModal
+        setShowNewThreadModal={setShowNewThreadModal}
+        showNewThreadModal={showNewThreadModal}
+      />
+
       <UserInputBar />
     </div>
   );

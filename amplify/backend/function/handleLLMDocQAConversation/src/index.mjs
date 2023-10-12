@@ -9,10 +9,18 @@ Amplify Params - DO NOT EDIT */
  */
 
 // Custom Code Imports
-import { getFile } from "./getFile.mjs";
-import { saveFile } from "./saveFile.mjs";
-import { docQA } from "./docQA.mjs";
-import { getOpenAIKey } from "./getOpenAIKey.mjs";
+import { getFile } from "./utilities/getFile.mjs";
+import { saveFile } from "./utilities/saveFile.mjs";
+import { main } from "./utilities/main.mjs";
+import { getOpenAIKey } from "./utilities/getOpenAIKey.mjs";
+
+// event.body definition
+//  {
+//   files: ["string"],
+//   question: "string",
+//   userID: "string",
+//   threadID: "string",
+// };
 
 export const handler = async (event) => {
   try {
@@ -33,22 +41,32 @@ export const handler = async (event) => {
     const OPENAI_API_KEY = await getOpenAIKey();
 
     // Get the body and save to payload
-    const files = JSON.parse(event.body); // Expecting an array of file keys
+    const payload = JSON.parse(event.body); // Expecting an array of file keys
 
     // Return an error if no files are recieved in the body
-    if (files.length < 1) return { statusCode: 400, body: "No files found" };
+    if (payload.files?.length < 1)
+      return { statusCode: 400, body: "No files found" };
 
     let filePaths = [];
-    for (let i = 0; i < files.length; i++) {
+    for (let i = 0; i < payload.files.length; i++) {
       const buffer = await getFile(
         "amplifyaistoragebucket134815-dev",
-        files[i]
+        payload.files[i]
       );
-      const newFilePath = saveFile(buffer, files[i]);
+      const newFilePath = saveFile(buffer, payload.files[i]);
       filePaths.push(newFilePath);
     }
 
-    const result = await docQA(OPENAI_API_KEY);
+    // payload for main function
+    const mainPayload = {
+      apiKey: OPENAI_API_KEY,
+      question: payload.question,
+      userID: payload.userID,
+      threadID: payload.threadID,
+    };
+
+    const result = await main(mainPayload);
+
     console.log("result: ", result);
     console.log("result type: ", typeof result);
 

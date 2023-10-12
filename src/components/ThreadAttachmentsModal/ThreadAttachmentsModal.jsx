@@ -64,33 +64,33 @@ const ThreadAttachmentsModal = () => {
     deleteFile(fileKey, threadID);
   };
 
-  const handleDeleteUrl = (url) => {
-    const newUrls = currentThreadUrls.filter((item) => item.url !== url);
-    updateThreadUrls(newUrls, threadID);
-    setUrlList(newUrls);
-  };
+  // const handleDeleteUrl = (url) => {
+  //   const newUrls = currentThreadUrls.filter((item) => item.url !== url);
+  //   updateThreadUrls(newUrls, threadID);
+  //   setUrlList(newUrls);
+  // };
 
-  const handleAddUrl = () => {
-    setUrlList([...urlList, urlInput]);
-    setUrlInput("");
-    setShowUrlInput(false);
+  // const handleAddUrl = () => {
+  //   setUrlList([...urlList, urlInput]);
+  //   setUrlInput("");
+  //   setShowUrlInput(false);
 
-    const newUrls = [...urlList, urlInput];
-    updateThreadUrls(newUrls, threadID);
-  };
+  //   const newUrls = [...urlList, urlInput];
+  //   updateThreadUrls(newUrls, threadID);
+  // };
 
-  const handleUrlChange = (event) => {
-    setUrlInput(event.target.value);
-  };
+  // const handleUrlChange = (event) => {
+  //   setUrlInput(event.target.value);
+  // };
 
-  const handleShowUrlInput = () => {
-    setShowUrlInput(true);
-  };
+  // const handleShowUrlInput = () => {
+  //   setShowUrlInput(true);
+  // };
 
-  const handleCloseUrlInput = () => {
-    setShowUrlInput(false);
-    setUrlInput("");
-  };
+  // const handleCloseUrlInput = () => {
+  //   setShowUrlInput(false);
+  //   setUrlInput("");
+  // };
 
   return (
     <Modal
@@ -101,13 +101,10 @@ const ThreadAttachmentsModal = () => {
       centered
       onOk={handleClose}
     >
+      <Typography.Title level={3}>
+        Add Documents to this Thread
+      </Typography.Title>
       <Row gutter={24}>
-        <Typography.Title level={3} type="warning">
-          This Section is Under Construction - Coming Soon.
-        </Typography.Title>
-        <Col>
-          <Typography.Title level={4}>File Attachments</Typography.Title>
-        </Col>
         <Col>
           <Upload
             customRequest={({ file }) => uploadFile(file, threadID)}
@@ -143,7 +140,7 @@ const ThreadAttachmentsModal = () => {
         </Col>
       </Row>
 
-      <Row gutter={24} style={{ paddingTop: "2rem" }}>
+      {/* <Row gutter={24} style={{ paddingTop: "2rem" }}>
         <Col>
           <Typography.Title level={4}>URL Attachments</Typography.Title>
         </Col>
@@ -199,7 +196,7 @@ const ThreadAttachmentsModal = () => {
             )}
           />
         </Col>
-      </Row>
+      </Row> */}
     </Modal>
   );
 };
