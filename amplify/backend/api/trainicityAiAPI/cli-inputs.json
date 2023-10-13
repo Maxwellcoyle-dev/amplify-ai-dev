@@ -56,13 +56,6 @@
       "permissions": {
         "setting": "open"
       }
-    },
-    "/chatGPT4": {
-      "name": "/chatGPT4",
-      "lambdaFunction": "handleChatGPT4",
-      "permissions": {
-        "setting": "open"
-      }
     }
   }
 }

@@ -7,6 +7,7 @@
   max-width: 1300px;
   align-items: flex-start;
   justify-content: center;
+  justify-self: flex-end;
 }
 
 .TextEntryDiv {

@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "storage": {
+      "amplifyAiProjectTable": [
+        "create",
+        "read",
+        "update"
+      ],
+      "amplifyAiStorage": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "amplifyaidevlangchainLayer",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    },
+    {
+      "type": "ProjectLayer",
+      "resourceName": "amplifyaidevAWSLayer",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ]
+}

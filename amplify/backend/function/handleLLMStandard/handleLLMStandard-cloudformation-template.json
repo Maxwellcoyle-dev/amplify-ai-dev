@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.4.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.6.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -16,8 +16,29 @@
     "s3Key": {
       "Type": "String"
     },
-    "secretsPathAmplifyAppId": {
-      "Type": "String"
+    "storageamplifyAiProjectTableName": {
+      "Type": "String",
+      "Default": "storageamplifyAiProjectTableName"
+    },
+    "storageamplifyAiProjectTableArn": {
+      "Type": "String",
+      "Default": "storageamplifyAiProjectTableArn"
+    },
+    "storageamplifyAiProjectTableStreamArn": {
+      "Type": "String",
+      "Default": "storageamplifyAiProjectTableStreamArn"
+    },
+    "storageamplifyAiStorageBucketName": {
+      "Type": "String",
+      "Default": "storageamplifyAiStorageBucketName"
+    },
+    "functionamplifyaidevlangchainLayerArn": {
+      "Type": "String",
+      "Default": "functionamplifyaidevlangchainLayerArn"
+    },
+    "functionamplifyaidevAWSLayerArn": {
+      "Type": "String",
+      "Default": "functionamplifyaidevAWSLayerArn"
     }
   },
   "Conditions": {
@@ -50,12 +71,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "handleChatGPT4",
+            "handleLLMStandard",
             {
               "Fn::Join": [
                 "",
                 [
-                  "handleChatGPT4",
+                  "handleLLMStandard",
                   "-",
                   {
                     "Ref": "env"
@@ -73,27 +94,17 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "OPENAI_API_KEY": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Sub": [
-                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                      {
-                        "appId": {
-                          "Ref": "secretsPathAmplifyAppId"
-                        },
-                        "env": {
-                          "Ref": "env"
-                        },
-                        "functionName": "handleChatGPT4"
-                      }
-                    ]
-                  },
-                  "OPENAI_API_KEY"
-                ]
-              ]
+            "STORAGE_AMPLIFYAIPROJECTTABLE_NAME": {
+              "Ref": "storageamplifyAiProjectTableName"
+            },
+            "STORAGE_AMPLIFYAIPROJECTTABLE_ARN": {
+              "Ref": "storageamplifyAiProjectTableArn"
+            },
+            "STORAGE_AMPLIFYAIPROJECTTABLE_STREAMARN": {
+              "Ref": "storageamplifyAiProjectTableStreamArn"
+            },
+            "STORAGE_AMPLIFYAISTORAGE_BUCKETNAME": {
+              "Ref": "storageamplifyAiStorageBucketName"
             }
           }
         },
@@ -104,8 +115,15 @@
           ]
         },
         "Runtime": "nodejs18.x",
-        "Layers": [],
-        "Timeout": 55
+        "Layers": [
+          {
+            "Ref": "functionamplifyaidevlangchainLayerArn"
+          },
+          {
+            "Ref": "functionamplifyaidevAWSLayerArn"
+          }
+        ],
+        "Timeout": 300
       }
     },
     "LambdaExecutionRole": {
@@ -114,12 +132,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyaidevLambdaRole3427f297",
+            "amplifyaidevLambdaRolec2acaabe",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyaidevLambdaRole3427f297",
+                  "amplifyaidevLambdaRolec2acaabe",
                   "-",
                   {
                     "Ref": "env"
@@ -190,10 +208,13 @@
         }
       }
     },
-    "AmplifyFunctionSecretsPolicy": {
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
       "Type": "AWS::IAM::Policy",
       "Properties": {
-        "PolicyName": "amplify-function-secrets-policy",
+        "PolicyName": "amplify-lambda-execution-policy",
         "Roles": [
           {
             "Ref": "LambdaExecutionRole"
@@ -205,47 +226,75 @@
             {
               "Effect": "Allow",
               "Action": [
-                "ssm:GetParameter",
-                "ssm:GetParameters"
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:PartiQLSelect",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:PartiQLUpdate"
               ],
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:ssm:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":parameter",
-                    {
-                      "Fn::Sub": [
-                        "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                        {
-                          "appId": {
-                            "Ref": "secretsPathAmplifyAppId"
-                          },
-                          "env": {
-                            "Ref": "env"
-                          },
-                          "functionName": "handleChatGPT4"
-                        }
-                      ]
-                    },
-                    "*"
+              "Resource": [
+                {
+                  "Ref": "storageamplifyAiProjectTableArn"
+                },
+                {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      {
+                        "Ref": "storageamplifyAiProjectTableArn"
+                      },
+                      "index/*"
+                    ]
                   ]
-                ]
-              }
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": "s3:ListBucket",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storageamplifyAiStorageBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storageamplifyAiStorageBucketName"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }
-      },
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ]
+      }
     }
   },
   "Outputs": {

@@ -23,6 +23,7 @@ export const SET_CURRENT_THREAD_URLS = "SET_CURRENT_THREAD_URLS";
 
 // Mode Actions
 export const SET_MODE = "SET_MODE";
+export const SET_MODEL = "SET_MODEL";
 
 // Side Panel Actions
 

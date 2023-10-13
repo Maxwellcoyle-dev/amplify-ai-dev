@@ -11,17 +11,24 @@ import useGetThread from "../../hooks/useGetThread";
 
 // Styles
 import styles from "./ChatContainer.module.css";
-import { Space, Spin } from "antd";
+import { Button, Space, Spin, Flex, Typography } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
-const ChatContainer = ({ setShowTopBar, showTopBar }) => {
+const ChatContainer = ({
+  setShowTopBar,
+  showTopBar,
+  setShowNewThreadModal,
+}) => {
   const [updateThread, setUpdateThread] = useState(false);
 
   // Get threadLoading and threadError from useGetThread hook
   const { threadLoading } = useGetThread();
 
   // Get ThreadData State then destructure currentThread
-  const { threadData } = useContext(AppStateContext);
-  const currentThread = threadData.currentThread;
+  const state = useContext(AppStateContext);
+  const currentThread = state?.threadData?.currentThread;
+  const mode = currentThread?.threadMode;
+  const currentFiles = currentThread?.files;
 
   // Handle auto scrolling when new message is added
   // Add ref to last message
@@ -33,12 +40,13 @@ const ChatContainer = ({ setShowTopBar, showTopBar }) => {
       behavior: "smooth",
       block: "start",
     });
-  }, [currentThread, threadData]);
+  }, [currentThread]);
 
   const containerRef = useRef(null);
   let lastScrollTop = 0;
 
   useEffect(() => {
+    if (!containerRef.current) return;
     const handleScroll = () => {
       let st = containerRef.current.scrollTop;
       const threshold = 5; // or whatever value works for you
@@ -61,24 +69,56 @@ const ChatContainer = ({ setShowTopBar, showTopBar }) => {
     };
   }, [setShowTopBar]);
 
-  useEffect(() => {
-    console.log(threadLoading);
-  }, [threadLoading]);
+  const handleNewThread = () => {
+    setShowNewThreadModal(true);
+  };
 
   return (
-    <div
+    <Flex
+      vertical
+      gap="middle"
       className={`${styles.container} ${
         showTopBar ? "" : styles["topBar-hidden"]
       }`}
       ref={containerRef}
     >
       {threadLoading ? (
-        <Space>
+        <Space style={{ height: "100vh" }}>
           <Spin />
         </Space>
+      ) : mode === "" ? (
+        <Flex
+          style={{ width: "100%", height: "100vh" }}
+          justify="center"
+          align="center"
+          gap="middle"
+        >
+          <Button icon={<PlusOutlined />} onClick={handleNewThread}>
+            New Thread
+          </Button>
+          <Typography.Title level={4} strong>
+            /
+          </Typography.Title>
+          <Typography.Text>
+            Choose a previous Thread to work with.
+          </Typography.Text>
+        </Flex>
+      ) : !currentThread.messages ? (
+        <Flex
+          style={{ width: "100%", height: "100vh" }}
+          justify="center"
+          align="center"
+          gap="middle"
+        >
+          <Typography.Text>
+            {currentFiles
+              ? `Write a message to start the thread.`
+              : `There are no files attached to this thread. Click "Thread Attachments" to add files.`}
+          </Typography.Text>
+        </Flex>
       ) : (
         currentThread.messages &&
-        currentThread.messages.map((message, i) => (
+        currentThread?.messages?.map((message, i) => (
           <ChatMessage
             key={message.messageID}
             persona={message.role}
@@ -92,7 +132,7 @@ const ChatContainer = ({ setShowTopBar, showTopBar }) => {
           />
         ))
       )}
-    </div>
+    </Flex>
   );
 };
 
