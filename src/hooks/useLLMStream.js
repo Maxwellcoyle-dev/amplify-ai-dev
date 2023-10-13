@@ -81,13 +81,23 @@ const useLLMStream = () => {
       ];
     }
 
+    const threadInstructions =
+      state.threadData.currentThread.threadInstructions;
+
+    console.log("threadInstructions: ", threadInstructions);
+
+    const initBody = {
+      threadInstructions: threadInstructions,
+      messages: currentMessageThread,
+    };
+
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(currentMessageThread),
+        body: JSON.stringify(initBody),
         signal,
       });
 

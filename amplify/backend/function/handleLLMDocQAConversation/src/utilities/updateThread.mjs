@@ -60,7 +60,6 @@ export const updateThread = async (payload) => {
     return data;
   } catch (err) {
     console.error("UpdateThread Error: ", err);
-    console.log("UpdateThread Error message:", err.message);
-    console.log("UpdateThread Stack trace:", err.stack);
+    return err;
   }
 };

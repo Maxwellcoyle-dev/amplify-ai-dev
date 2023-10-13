@@ -28,6 +28,7 @@ const ChatContainer = ({
   const state = useContext(AppStateContext);
   const currentThread = state?.threadData?.currentThread;
   const mode = currentThread?.threadMode;
+  const currentFiles = currentThread?.files;
 
   // Handle auto scrolling when new message is added
   // Add ref to last message
@@ -110,7 +111,9 @@ const ChatContainer = ({
           gap="middle"
         >
           <Typography.Text>
-            Write a message to start the thread.
+            {currentFiles
+              ? `Write a message to start the thread.`
+              : `There are no files attached to this thread. Click "Thread Attachments" to add files.`}
           </Typography.Text>
         </Flex>
       ) : (

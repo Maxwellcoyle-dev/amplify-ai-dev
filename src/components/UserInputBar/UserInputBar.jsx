@@ -24,19 +24,17 @@ const UserInputBar = () => {
 
   // const { fetchChat, chatLoading } = useOpenAIChat();
   const { fetchChatStream, streamLoading } = useLLMStream();
-  const { fetchDocQA } = useLLMDocQA();
+  const { fetchDocQA, docQALoading } = useLLMDocQA();
 
   const state = useContext(AppStateContext);
   const mode = state.threadData?.currentThread?.threadMode;
 
   const handleSubmit = async () => {
-    console.log(state);
-    console.log(mode);
     if (mode === "Doc QA Chat") {
-      await fetchDocQA(value);
+      fetchDocQA(value);
       setValue("");
     } else if (mode === "Standard Chat") {
-      await fetchChatStream(value);
+      fetchChatStream(value);
       setValue("");
     }
   };
@@ -53,7 +51,7 @@ const UserInputBar = () => {
           Shift + Enter to add a new line
         </Typography.Text>
       </div>
-      {streamLoading ? (
+      {streamLoading || docQALoading ? (
         <Spin className={styles.loading} size="large" />
       ) : (
         <Button

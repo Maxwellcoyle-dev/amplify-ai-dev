@@ -20,6 +20,7 @@ import {
 } from "antd";
 
 import { UploadOutlined } from "@ant-design/icons";
+import AddFiles from "../AddFiles/AddFiles";
 
 const { TextArea } = Input;
 
@@ -186,18 +187,7 @@ const NewThreadModal = ({ setShowNewThreadModal, showNewThreadModal }) => {
                   Give your thread a title. (Optional)
                 </Typography.Text>
                 <Input value={newTitle} onChange={handleSetTitle} />
-                <Typography.Text>
-                  Tell the AI what you need help with / Give some initial
-                  instructions / Describe key context. (Optional)
-                </Typography.Text>
-                <TextArea
-                  value={newThreadInstructions}
-                  onChange={handleSetInstructions}
-                  autoSize={{
-                    minRows: 3,
-                    maxRows: 5,
-                  }}
-                />
+                <Divider />
                 <Button
                   type="primary"
                   icon={<UploadOutlined />}

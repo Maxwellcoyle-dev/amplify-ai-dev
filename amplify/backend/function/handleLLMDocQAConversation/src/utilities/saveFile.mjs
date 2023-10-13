@@ -37,5 +37,6 @@ export const saveFile = (buffer, filename) => {
     return filePath;
   } catch (err) {
     console.error("Error saving the file:", err);
+    return null;
   }
 };

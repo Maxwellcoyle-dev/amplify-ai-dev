@@ -28,6 +28,6 @@ export const getFile = async (bucketName, key) => {
     }
   } catch (error) {
     console.error("Error getting object from S3:", error);
-    throw error; // If you want to end the execution in case of an error
+    return null;
   }
 };

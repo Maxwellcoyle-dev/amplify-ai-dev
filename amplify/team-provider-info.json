@@ -59,12 +59,12 @@
         },
         "handleLLMDocQAConversation": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleLLMDocQAConversation-6e483530687966502b36-build.zip"
+          "s3Key": "amplify-builds/handleLLMDocQAConversation-34474b4d434e4c38324e-build.zip"
         },
         "handleChatGPT4": {},
         "handleLLMStandard": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleLLMStandard-7a696433427449466a47-build.zip"
+          "s3Key": "amplify-builds/handleLLMStandard-7158515839684566554d-build.zip"
         }
       },
       "storage": {

@@ -45,25 +45,26 @@ export const handler = async (event) => {
     console.log("payload: ", payload);
 
     // Return an error if no files are recieved in the body
-    if (payload.body.files?.length < 1)
+    if (payload.files?.length < 1)
       return { statusCode: 400, body: "No files found" };
 
     let filePaths = [];
-    for (let i = 0; i < payload.body.files?.length; i++) {
+    for (let i = 0; i < payload.files?.length; i++) {
       const buffer = await getFile(
         "amplifyaistoragebucket134815-dev",
-        payload.body.files[i]
+        payload.files[i]
       );
-      const newFilePath = saveFile(buffer, payload.body.files[i]);
+      const newFilePath = saveFile(buffer, payload.files[i]);
       filePaths.push(newFilePath);
     }
 
     // payload for main function
     const mainPayload = {
       apiKey: OPENAI_API_KEY,
-      question: payload.body.question,
-      userID: payload.body.userID,
-      threadID: payload.body.threadID,
+      question: payload.question,
+      instructions: payload.instructions,
+      userID: payload.userID,
+      threadID: payload.threadID,
     };
 
     const result = await langChainMain(mainPayload);
@@ -76,6 +77,9 @@ export const handler = async (event) => {
     };
   } catch (error) {
     console.error(error);
-    throw error; // If you want to end the execution in case of an error
+    return {
+      statusCode: 500,
+      body: JSON.stringify(error),
+    };
   }
 };

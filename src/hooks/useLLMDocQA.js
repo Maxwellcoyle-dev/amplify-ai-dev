@@ -56,38 +56,40 @@ const useLLMDocQA = () => {
       const user = await Auth.currentAuthenticatedUser();
       const userID = user.attributes.email; // Get the current user's email for userID
       const threadID = state.threadData.currentThread.threadID;
+      const threadInstructions = state.threadData.currentThread.instructions;
 
       if (fileKeyList.length === 0) return "No files";
       console.log(fileKeyList);
 
       const init = {
-        body: {
-          files: fileKeyList,
-          question: userMessage,
-          userID,
-          threadID,
-        },
+        files: fileKeyList,
+        question: userMessage,
+        instructions: threadInstructions,
+        userID,
+        threadID,
       };
 
-      await fetch(URL, {
+      const response = await fetch(URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(init),
-      }).then((response) => {
-        console.log(response);
-        // Create a unique message ID
-        const assistantMessageID = uuidv4();
-        dispatch({
-          type: ADD_MESSAGE,
-          payload: {
-            role: "assistant",
-            content: response.text,
-            messageID: assistantMessageID,
-          },
-        });
       });
+
+      const data = await response.json();
+      console.log(data);
+      // Create a unique message ID
+      const assistantMessageID = uuidv4();
+      dispatch({
+        type: ADD_MESSAGE,
+        payload: {
+          role: "assistant",
+          content: data.text,
+          messageID: assistantMessageID,
+        },
+      });
+      setDocQALoading(false);
     } catch (error) {
       console.log(error);
       setDocQAError(true);

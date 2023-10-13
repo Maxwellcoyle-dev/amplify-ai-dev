@@ -35,5 +35,6 @@ export const prepDocs = async () => {
     return splitDocs;
   } catch (err) {
     console.error("prepDocs Error: ", err);
+    return err;
   }
 };

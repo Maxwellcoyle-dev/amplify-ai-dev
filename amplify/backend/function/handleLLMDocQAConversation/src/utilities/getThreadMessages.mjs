@@ -32,5 +32,6 @@ export const getThreadMessages = async (userID, threadID) => {
     return currentThreadMessages;
   } catch (err) {
     console.error("GetThread Error: ", err);
+    return err;
   }
 };
