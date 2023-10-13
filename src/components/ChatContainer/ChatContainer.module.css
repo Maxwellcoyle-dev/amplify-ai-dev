@@ -2,21 +2,18 @@
   width: 100%;
   padding: 0 3rem;
   margin: auto;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 4.5rem);
   overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0);
   transition: transform 0.3s ease-in-out; /* Transition for smooth animation */
-  margin-top: 4rem;
+  margin-top: 4.5rem;
   transition: margin-top 0.3s ease-in-out; /* Transition for smooth animation */
 }
 
 .topBar-hidden {
   transform: translateY(0);
-  margin-top: 0;
+  margin-top: 0.5rem;
   height: 100vh;
 }
 

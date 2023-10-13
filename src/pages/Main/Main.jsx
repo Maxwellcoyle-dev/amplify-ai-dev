@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 
 // Styles
 import styles from "./Main.module.css";
@@ -10,6 +10,9 @@ import ThreadAttachmentsModal from "../../components/ThreadAttachmentsModal/Thre
 import TopBar from "../../components/TopBar/TopBar";
 import NewThreadModal from "../../components/NewThreadModal/NewThreadModal";
 
+// Ant Design
+import { Flex } from "antd";
+
 const Main = ({
   setShowTopBar,
   showTopBar,
@@ -17,17 +20,21 @@ const Main = ({
   showNewThreadModal,
 }) => {
   return (
-    <div className={styles.container}>
+    <Flex className={styles.container} vertical>
       <TopBar showTopBar={showTopBar} />
       <ThreadAttachmentsModal />
-      <ChatContainer setShowTopBar={setShowTopBar} showTopBar={showTopBar} />
+      <ChatContainer
+        setShowTopBar={setShowTopBar}
+        showTopBar={showTopBar}
+        setShowNewThreadModal={setShowNewThreadModal}
+      />
       <NewThreadModal
         setShowNewThreadModal={setShowNewThreadModal}
         showNewThreadModal={showNewThreadModal}
       />
 
       <UserInputBar />
-    </div>
+    </Flex>
   );
 };
 

@@ -6,6 +6,8 @@ const s3Client = new S3Client({ region: REGION });
 
 // Expects a bucketName + a key
 export const getFile = async (bucketName, key) => {
+  console.log("getFile bucketName: ", bucketName);
+  console.log("getFile key: ", key);
   const params = {
     Bucket: bucketName,
     Key: key,

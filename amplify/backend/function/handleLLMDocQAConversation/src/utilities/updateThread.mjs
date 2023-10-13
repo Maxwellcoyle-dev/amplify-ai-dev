@@ -1,4 +1,5 @@
 import { DynamoDBClient, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
+import { v4 as uuidv4 } from "uuid";
 
 const REGION = "us-east-2";
 const ddbClient = new DynamoDBClient({ region: REGION });
@@ -7,21 +8,32 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 // {
 //   "userID": "string",
 //   "threadID": "string",
-//   "message": [
+//   "messageList": [
 //     {
 //       "role": "string",
 //       "content": "string",
 //       "messageID": "string"
 //     }
-
-//  lastUpdated
+//   ]
+//   "assistantResponse": "string"
+// }
 
 export const updateThread = async (payload) => {
   // Set the lastUpdated timestamp
   const lastUpdated = Date.now().toString();
 
+  // build a new message list with the old list + the assiatnt response
+  const newMessageList = [
+    ...payload.messageList,
+    {
+      role: "assistant",
+      content: payload.assistantResponse,
+      messageID: uuidv4(),
+    },
+  ];
+
   // Convert the messages array into DynamoDB format
-  const messagesForDynamo = payload.messages.map((message) => ({
+  const messagesForDynamo = newMessageList?.map((message) => ({
     M: {
       role: { S: message.role },
       content: { S: message.content },
@@ -44,7 +56,7 @@ export const updateThread = async (payload) => {
 
   try {
     const data = await ddbClient.send(new UpdateItemCommand(params));
-    console.log("Success", data);
+    console.log("Update Thread Success - Data: ", data);
     return data;
   } catch (err) {
     console.error("UpdateThread Error: ", err);

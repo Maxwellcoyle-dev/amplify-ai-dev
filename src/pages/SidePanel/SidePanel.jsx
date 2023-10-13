@@ -52,7 +52,7 @@ const SidePanel = ({ collapsed, setShowNewThreadModal }) => {
   };
 
   return (
-    <Space direction="vertical" className={styles.container}>
+    <Space direction="vertical" className={styles.container} theme="dark">
       <SidePanelHeader collapsed={collapsed} />
 
       <Menu

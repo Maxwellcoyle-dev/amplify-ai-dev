@@ -24,13 +24,6 @@ export type AmplifyDependentResourcesAttributes = {
     "amplifyaidevlangchainLayer": {
       "Arn": "string"
     },
-    "handleChatGPT4": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "handleCurrentThread": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -74,6 +67,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "handleLLMDocSum": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "handleLLMStandard": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

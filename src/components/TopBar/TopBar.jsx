@@ -5,7 +5,7 @@ import TopBarTitle from "../TopBarTitle/TopBarTitle";
 import TopBarMenu from "../TopBarMenu/TopBarMenu";
 
 // Context & Actions
-import { AppStateContext, AppDispatchContext } from "../../state/AppContext";
+import { AppStateContext } from "../../state/AppContext";
 
 // Ant Design
 import { Typography, Space } from "antd";
@@ -14,7 +14,7 @@ import styles from "./TopBar.module.css";
 
 const TopBar = ({ showTopBar }) => {
   const state = useContext(AppStateContext);
-  const mode = state.mode?.mode;
+  const mode = state.threadData.currentThread?.threadMode;
   return (
     <Space
       className={`${styles.topBar} ${

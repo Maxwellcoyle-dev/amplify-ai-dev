@@ -36,7 +36,6 @@ const NewThreadModal = ({ setShowNewThreadModal, showNewThreadModal }) => {
 
   const handleModeSelection = (mode) => {
     setNewThreadMode(mode);
-    // if (mode === "Doc QA Chat") dispatch({ type: "SHOW_ATTACHMENT_MODAL" });
   };
 
   const handleCancel = () => {
@@ -52,7 +51,7 @@ const NewThreadModal = ({ setShowNewThreadModal, showNewThreadModal }) => {
     setNewThreadInstructions(e.target.value);
   };
 
-  const handleCreateThread = () => {
+  const handleCreateStandardThread = () => {
     dispatch({
       type: "CREATE_NEW_THREAD",
       payload: {
@@ -65,12 +64,33 @@ const NewThreadModal = ({ setShowNewThreadModal, showNewThreadModal }) => {
     setUpdateCurrentThread(true);
   };
 
+  const handleCreateDocQAThread = () => {
+    dispatch({
+      type: "CREATE_NEW_THREAD",
+      payload: {
+        threadTitle: newTitle,
+        threadMode: newThreadMode,
+        threadInstructions: newThreadInstructions,
+      },
+    });
+
+    setShowNewThreadModal(false);
+    setUpdateCurrentThread(true);
+    dispatch({ type: "SHOW_ATTACHMENT_MODAL" });
+  };
+
+  const handleAfterClose = () => {
+    setNewTitle("");
+    setNewThreadMode("");
+  };
+
   return (
     <Modal
       open={showNewThreadModal}
       onCancel={handleCancel}
       width="65%"
       keyboard
+      afterClose={handleAfterClose}
       footer={[
         <Button key="cancel" onClick={handleCancel}>
           Cancel
@@ -80,6 +100,7 @@ const NewThreadModal = ({ setShowNewThreadModal, showNewThreadModal }) => {
       <Typography.Title level={3}>Pick a Mode</Typography.Title>
       <Row gutter={[16, 16]}>
         <Col span={12}>
+          {/* STANDARD CHAT CARD */}
           <Card>
             <Typography.Title
               type={
@@ -124,7 +145,7 @@ const NewThreadModal = ({ setShowNewThreadModal, showNewThreadModal }) => {
                     maxRows: 5,
                   }}
                 />
-                <Button type="primary" onClick={handleCreateThread}>
+                <Button type="primary" onClick={handleCreateStandardThread}>
                   Create Thread
                 </Button>
               </Space>
@@ -132,6 +153,7 @@ const NewThreadModal = ({ setShowNewThreadModal, showNewThreadModal }) => {
           </Card>
         </Col>
         <Col span={12}>
+          {/* DOC QA CHAT CARD */}
           <Card>
             <Typography.Title
               type={
@@ -169,14 +191,18 @@ const NewThreadModal = ({ setShowNewThreadModal, showNewThreadModal }) => {
                   instructions / Describe key context. (Optional)
                 </Typography.Text>
                 <TextArea
-                  value={newTitle}
-                  onChange={handleSetTitle}
+                  value={newThreadInstructions}
+                  onChange={handleSetInstructions}
                   autoSize={{
                     minRows: 3,
                     maxRows: 5,
                   }}
                 />
-                <Button type="primary" icon={<UploadOutlined />}>
+                <Button
+                  type="primary"
+                  icon={<UploadOutlined />}
+                  onClick={handleCreateDocQAThread}
+                >
                   Add Documents
                 </Button>
               </Space>

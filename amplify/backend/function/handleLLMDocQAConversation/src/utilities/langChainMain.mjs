@@ -9,13 +9,11 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 
 // utility functions
-import { getThread } from "./getThread.js";
-import { prepDocs } from "./prepDocs.js";
-import { setBufferMemory } from "./setBufferMemory.js";
-import { updateThread } from "./updateThread.js";
-
-// messageID
-import { v4 as uuidv4 } from "uuid";
+import { getThreadMessages } from "./getThreadMessages.mjs";
+import { prepDocs } from "./prepDocs.mjs";
+import { setMemoryBuffer } from "./setMemoryBuffer.mjs";
+import { updateThread } from "./updateThread.mjs";
+import { buildMessageLists } from "./buildMessageLists.mjs";
 
 // payload definition
 // const payload = {
@@ -25,52 +23,26 @@ import { v4 as uuidv4 } from "uuid";
 //   threadID: "",
 // };
 
-export const main = async (payload) => {
+export const langChainMain = async (payload) => {
   try {
+    console.log("langChainMain payload: ", payload);
     // get 2 versions of the messages array
     // 1. for the buffer memory
     // 2. for the message update
-    const { bufferMessageList, messageList } = await getThread(
+    const currentThreadMessages = await getThreadMessages(
       payload.userID,
       payload.threadID
     );
 
-    // if there are no messages for this thread,
-    // update the thread messages with the new message from the user
-    // else do the same but add the new message to the end of the array
-    if (!messageList || messageList?.length === 0) {
-      const newMessageList = [
-        {
-          role: "user",
-          content: payload.question,
-          messageID: uuidv4(),
-        },
-      ];
-      const newMessagePayload = {
-        newMessageList: newMessageList,
-        userID: payload.userID,
-        threadID: payload.threadID,
-      };
-      updateThread(newMessagePayload);
-    } else {
-      const newMessageList = [
-        ...messageList,
-        {
-          role: "user",
-          content: payload.question,
-          messageID: uuidv4(),
-        },
-      ];
-      const newMessagePayload = {
-        newMessageList: newMessageList,
-        userID: payload.userID,
-        threadID: payload.threadID,
-      };
-      updateThread(newMessagePayload);
-    }
+    // use the current threadMessageList + the new question to build the
+    // buffer memory list for this query
+    const { bufferMessageList, messageList } = buildMessageLists(
+      currentThreadMessages,
+      payload.question
+    );
 
     // send messages array to memory buffer
-    const bufferMemory = await setBufferMemory(bufferMessageList);
+    const bufferMemory = await setMemoryBuffer(bufferMessageList);
 
     // Load the documents to use as context.
     const splitDocs = await prepDocs();
@@ -99,7 +71,7 @@ export const main = async (payload) => {
       vectorStore.asRetriever(),
       {
         returnSourceDocuments: true,
-        bufferMemory,
+        memory: bufferMemory,
       }
     );
 
@@ -109,25 +81,16 @@ export const main = async (payload) => {
     });
 
     console.log("Res: ", res);
+    console.log("messageList: ", messageList);
 
-    const newMessageList = [
-      ...messageList,
-      {
-        role: "assistant",
-        content: res.text,
-        messageID: uuidv4(),
-      },
-    ];
-    const newMessagePayload = {
-      newMessageList: newMessageList,
+    updateThread({
       userID: payload.userID,
       threadID: payload.threadID,
-    };
-    updateThread(newMessagePayload);
+      messageList: messageList,
+      assistantResponse: res.text,
+    });
 
-    console.log("message store: ", messageStore);
-
-    return { res, followUpRes };
+    return { res };
   } catch (error) {
     console.log({ error });
     return error;

@@ -65,14 +65,6 @@
           ],
           "category": "function",
           "resourceName": "handleUploadFile"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "handleChatGPT4"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -117,11 +109,6 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer"
-    },
-    "handleChatGPT4": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     },
     "handleCurrentThread": {
       "build": true,
@@ -236,6 +223,15 @@
       "dependsOn": [
         {
           "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiProjectTable"
+        },
+        {
+          "attributes": [
             "BucketName"
           ],
           "category": "storage",
@@ -262,6 +258,43 @@
     "handleLLMDocSum": {
       "build": true,
       "dependsOn": [
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiStorage"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyaidevlangchainLayer"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyaidevAWSLayer"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "handleLLMStandard": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "amplifyAiProjectTable"
+        },
         {
           "attributes": [
             "BucketName"
@@ -376,30 +409,6 @@
         }
       ]
     },
-    "AMPLIFY_function_handleChatGPT4_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleChatGPT4"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleChatGPT4_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleChatGPT4"
-        }
-      ]
-    },
-    "AMPLIFY_function_handleChatGPT4_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "handleChatGPT4"
-        }
-      ]
-    },
     "AMPLIFY_function_handleCurrentThread_deploymentBucketName": {
       "usedBy": [
         {
@@ -509,6 +518,22 @@
         {
           "category": "function",
           "resourceName": "handleLLMDocSum"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleLLMStandard_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleLLMStandard"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleLLMStandard_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleLLMStandard"
         }
       ]
     },

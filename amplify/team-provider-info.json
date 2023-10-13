@@ -45,11 +45,6 @@
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
           "s3Key": "amplify-builds/handleCurrentThread-576e546a302b57743250-build.zip"
         },
-        "handleChatGPT4": {
-          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleChatGPT4-393973566a5166346a4f-build.zip",
-          "secretsPathAmplifyAppId": "d7unl533h0att"
-        },
         "amplifyaidevlangchainLayer": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
           "s3Key": "amplify-builds/amplifyaidevlangchainLayer-LambdaLayerVersion76e0440a-build.zip"
@@ -64,7 +59,12 @@
         },
         "handleLLMDocQAConversation": {
           "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
-          "s3Key": "amplify-builds/handleLLMDocQAConversation-384469337039306e434c-build.zip"
+          "s3Key": "amplify-builds/handleLLMDocQAConversation-6e483530687966502b36-build.zip"
+        },
+        "handleChatGPT4": {},
+        "handleLLMStandard": {
+          "deploymentBucketName": "amplify-amplifyaidev-dev-134815-deployment",
+          "s3Key": "amplify-builds/handleLLMStandard-7a696433427449466a47-build.zip"
         }
       },
       "storage": {

@@ -11,7 +11,7 @@ Amplify Params - DO NOT EDIT */
 // Custom Code Imports
 import { getFile } from "./utilities/getFile.mjs";
 import { saveFile } from "./utilities/saveFile.mjs";
-import { main } from "./utilities/main.mjs";
+import { langChainMain } from "./utilities/langChainMain.mjs";
 import { getOpenAIKey } from "./utilities/getOpenAIKey.mjs";
 
 // event.body definition
@@ -42,37 +42,37 @@ export const handler = async (event) => {
 
     // Get the body and save to payload
     const payload = JSON.parse(event.body); // Expecting an array of file keys
+    console.log("payload: ", payload);
 
     // Return an error if no files are recieved in the body
-    if (payload.files?.length < 1)
+    if (payload.body.files?.length < 1)
       return { statusCode: 400, body: "No files found" };
 
     let filePaths = [];
-    for (let i = 0; i < payload.files.length; i++) {
+    for (let i = 0; i < payload.body.files?.length; i++) {
       const buffer = await getFile(
         "amplifyaistoragebucket134815-dev",
-        payload.files[i]
+        payload.body.files[i]
       );
-      const newFilePath = saveFile(buffer, payload.files[i]);
+      const newFilePath = saveFile(buffer, payload.body.files[i]);
       filePaths.push(newFilePath);
     }
 
     // payload for main function
     const mainPayload = {
       apiKey: OPENAI_API_KEY,
-      question: payload.question,
-      userID: payload.userID,
-      threadID: payload.threadID,
+      question: payload.body.question,
+      userID: payload.body.userID,
+      threadID: payload.body.threadID,
     };
 
-    const result = await main(mainPayload);
+    const result = await langChainMain(mainPayload);
 
     console.log("result: ", result);
-    console.log("result type: ", typeof result);
 
     return {
       statusCode: 200,
-      body: JSON.stringify(result),
+      body: JSON.stringify(result.res),
     };
   } catch (error) {
     console.error(error);

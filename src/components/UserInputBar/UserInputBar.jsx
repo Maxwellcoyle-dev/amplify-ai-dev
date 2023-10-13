@@ -24,7 +24,7 @@ const UserInputBar = () => {
 
   // const { fetchChat, chatLoading } = useOpenAIChat();
   const { fetchChatStream, streamLoading } = useLLMStream();
-  const { fetchChatDocQA } = useLLMDocQA();
+  const { fetchDocQA } = useLLMDocQA();
 
   const state = useContext(AppStateContext);
   const mode = state.threadData?.currentThread?.threadMode;
@@ -33,7 +33,7 @@ const UserInputBar = () => {
     console.log(state);
     console.log(mode);
     if (mode === "Doc QA Chat") {
-      await fetchChatDocQA(value);
+      await fetchDocQA(value);
       setValue("");
     } else if (mode === "Standard Chat") {
       await fetchChatStream(value);
@@ -42,30 +42,29 @@ const UserInputBar = () => {
   };
 
   return (
-    mode !== "" && (
-      <div className={styles.container}>
-        <div className={styles.TextEntryDiv}>
-          <TextEntry
-            value={value}
-            setValue={setValue}
-            handleSubmit={handleSubmit}
-          />
-          <Typography.Text type="secondary" className={styles.text}>
-            Shift + Enter to add a new line
-          </Typography.Text>
-        </div>
-        {streamLoading ? (
-          <Spin className={styles.loading} size="large" />
-        ) : (
-          <Button
-            type="default"
-            icon={<SendOutlined />}
-            size="large"
-            onClick={handleSubmit}
-          />
-        )}
+    <div className={styles.container}>
+      <div className={styles.TextEntryDiv}>
+        <TextEntry
+          value={value}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+        />
+        <Typography.Text type="secondary" className={styles.text}>
+          Shift + Enter to add a new line
+        </Typography.Text>
       </div>
-    )
+      {streamLoading ? (
+        <Spin className={styles.loading} size="large" />
+      ) : (
+        <Button
+          disabled={mode === "" ? true : false}
+          type="default"
+          icon={<SendOutlined />}
+          size="large"
+          onClick={handleSubmit}
+        />
+      )}
+    </div>
   );
 };
 

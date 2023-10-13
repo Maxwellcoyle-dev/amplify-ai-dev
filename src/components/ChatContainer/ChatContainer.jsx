@@ -14,7 +14,11 @@ import styles from "./ChatContainer.module.css";
 import { Button, Space, Spin, Flex, Typography } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
-const ChatContainer = ({ setShowTopBar, showTopBar }) => {
+const ChatContainer = ({
+  setShowTopBar,
+  showTopBar,
+  setShowNewThreadModal,
+}) => {
   const [updateThread, setUpdateThread] = useState(false);
 
   // Get threadLoading and threadError from useGetThread hook
@@ -31,7 +35,6 @@ const ChatContainer = ({ setShowTopBar, showTopBar }) => {
 
   // useEffect to scroll to last message
   useEffect(() => {
-    if (!containerRef.current) return;
     lastMessageRef?.current?.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -65,26 +68,54 @@ const ChatContainer = ({ setShowTopBar, showTopBar }) => {
     };
   }, [setShowTopBar]);
 
-  return mode === "" ? (
-    <Flex style={{ height: "100vh" }} align="center" gap="middle">
-      <Button icon={<PlusOutlined />}>New Thread</Button>
-      <Typography.Text strong>Or</Typography.Text>
-      <Typography.Text>Choose a previous Thread to work with</Typography.Text>
-    </Flex>
-  ) : (
-    <div
+  const handleNewThread = () => {
+    setShowNewThreadModal(true);
+  };
+
+  return (
+    <Flex
+      vertical
+      gap="middle"
       className={`${styles.container} ${
         showTopBar ? "" : styles["topBar-hidden"]
       }`}
       ref={containerRef}
     >
       {threadLoading ? (
-        <Space>
+        <Space style={{ height: "100vh" }}>
           <Spin />
         </Space>
+      ) : mode === "" ? (
+        <Flex
+          style={{ width: "100%", height: "100vh" }}
+          justify="center"
+          align="center"
+          gap="middle"
+        >
+          <Button icon={<PlusOutlined />} onClick={handleNewThread}>
+            New Thread
+          </Button>
+          <Typography.Title level={4} strong>
+            /
+          </Typography.Title>
+          <Typography.Text>
+            Choose a previous Thread to work with.
+          </Typography.Text>
+        </Flex>
+      ) : !currentThread.messages ? (
+        <Flex
+          style={{ width: "100%", height: "100vh" }}
+          justify="center"
+          align="center"
+          gap="middle"
+        >
+          <Typography.Text>
+            Write a message to start the thread.
+          </Typography.Text>
+        </Flex>
       ) : (
         currentThread.messages &&
-        currentThread.messages.map((message, i) => (
+        currentThread?.messages?.map((message, i) => (
           <ChatMessage
             key={message.messageID}
             persona={message.role}
@@ -98,7 +129,7 @@ const ChatContainer = ({ setShowTopBar, showTopBar }) => {
           />
         ))
       )}
-    </div>
+    </Flex>
   );
 };
 

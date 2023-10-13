@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+
 import { v4 as uuidv4 } from "uuid";
 
 // Context & Actions
@@ -10,7 +11,7 @@ import usePushCurrentThread from "./usePushCurrentThread";
 
 // Stream URL - This is the URL for the AWS Lambda function that is running the model
 const url =
-  "https://2bqtiy2yixbxo6ofp2eoh3mqpq0bhxqf.lambda-url.us-east-2.on.aws/";
+  "https://iirrlkwhvpayrjkshw6vf6fdnq0syntx.lambda-url.us-east-2.on.aws/";
 
 const useLLMStream = () => {
   const [streamedResponse, setStreamedResponse] = useState("");
@@ -69,7 +70,6 @@ const useLLMStream = () => {
     );
 
     // add { role: "user", content: userMessage } to the mappedMessageThread array
-
     let currentMessageThread = [];
 
     if (!mappedMessageThread) {
@@ -91,7 +91,7 @@ const useLLMStream = () => {
         signal,
       });
 
-      // set up reader to pipr stream into TextDecoderStream
+      // set up reader to pipe stream into TextDecoderStream
       const reader = response.body
         .pipeThrough(new TextDecoderStream())
         .getReader();

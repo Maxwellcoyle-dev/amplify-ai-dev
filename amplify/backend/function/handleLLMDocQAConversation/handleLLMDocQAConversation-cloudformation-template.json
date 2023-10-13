@@ -27,6 +27,18 @@
     "functionamplifyaidevAWSLayerArn": {
       "Type": "String",
       "Default": "functionamplifyaidevAWSLayerArn"
+    },
+    "storageamplifyAiProjectTableName": {
+      "Type": "String",
+      "Default": "storageamplifyAiProjectTableName"
+    },
+    "storageamplifyAiProjectTableArn": {
+      "Type": "String",
+      "Default": "storageamplifyAiProjectTableArn"
+    },
+    "storageamplifyAiProjectTableStreamArn": {
+      "Type": "String",
+      "Default": "storageamplifyAiProjectTableStreamArn"
     }
   },
   "Conditions": {
@@ -84,6 +96,15 @@
             },
             "STORAGE_AMPLIFYAISTORAGE_BUCKETNAME": {
               "Ref": "storageamplifyAiStorageBucketName"
+            },
+            "STORAGE_AMPLIFYAIPROJECTTABLE_NAME": {
+              "Ref": "storageamplifyAiProjectTableName"
+            },
+            "STORAGE_AMPLIFYAIPROJECTTABLE_ARN": {
+              "Ref": "storageamplifyAiProjectTableArn"
+            },
+            "STORAGE_AMPLIFYAIPROJECTTABLE_STREAMARN": {
+              "Ref": "storageamplifyAiProjectTableStreamArn"
             }
           }
         },
@@ -102,7 +123,7 @@
             "Ref": "functionamplifyaidevAWSLayerArn"
           }
         ],
-        "Timeout": 25
+        "Timeout": 300
       }
     },
     "LambdaExecutionRole": {
@@ -202,6 +223,41 @@
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PartiQLInsert",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:PartiQLSelect",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:PartiQLUpdate"
+              ],
+              "Resource": [
+                {
+                  "Ref": "storageamplifyAiProjectTableArn"
+                },
+                {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      {
+                        "Ref": "storageamplifyAiProjectTableArn"
+                      },
+                      "index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
             {
               "Effect": "Allow",
               "Action": "s3:ListBucket",

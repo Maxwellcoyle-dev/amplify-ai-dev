@@ -2,12 +2,12 @@
   "permissions": {
     "storage": {
       "amplifyAiProjectTable": [
-        "create",
         "read",
         "update"
       ],
       "amplifyAiStorage": [
-        "read"
+        "read",
+        "update"
       ]
     }
   },
